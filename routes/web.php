@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', 'BlogController@index');
+Route::get('/{lang}', 'BlogController@index');
 Route::get('/blog/{id}', 'BlogController@show');
 

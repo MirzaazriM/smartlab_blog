@@ -3,16 +3,55 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
-    public function index() {
+    public function index($lang) {
 
-        return view('index');
+        App::setlocale($lang);
+
+        $blogs = DB::select(
+            'SELECT 
+                      bt.heading, 
+                      bt.text, 
+                      u.name, 
+                      u.lastname, 
+                      DATE_FORMAT(b.created_at, \'%M %d, %Y\') AS created_at,  
+                      b.id, 
+                      b.published, 
+                      GROUP_CONCAT(bt.language) AS language 
+                    FROM blogs AS b
+                    LEFT JOIN users AS u ON b.users_id = u.id
+                    LEFT JOIN blog_translations AS bt ON b.id = bt.blogs_id
+                    WHERE bt.language = "' . $lang . '"
+                    GROUP BY b.id');
+
+        //die(print_r($blogs));
+        return view('index', ['blogs' => $blogs]);
     }
 
     public function show($id) {
 
-        return view('pages.blog');
+        $lang = App::getlocale();
+
+        $blog = DB::table('blogs')
+            ->select(
+                'blog_translations.heading',
+                'blog_translations.language',
+                'users.id',
+                'blogs.id',
+                'blogs.created_at',
+                'blog_translations.text',
+                'blog_translations.language'
+            )
+            ->leftJoin('users', 'blogs.users_id', '=', 'users.id')
+            ->leftJoin('blog_translations', 'blogs.id', '=', 'blog_translations.blogs_id')
+            ->where('blogs.id', $id)
+            ->where('blog_translations.language', $lang)
+            ->get();
+//die(print_r($blog));
+        return view('pages.blog', ['blog' => $blog[0]]);
     }
 }

@@ -9,6 +9,9 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
+        <!-- Styles In app.scss is Bootstrap included -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
         <!-- Styles -->
         <style>
             html, body {
@@ -65,7 +68,27 @@
     </head>
     <body>
 
-        <p>Blog</p>
+        <h2>Blogs</h2>
+
+        <table class="table table-striped table-light">
+            <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Created at</th>
+
+            </tr>
+            </thead>
+            <tbody>
+                @foreach($blogs as $blog)
+                   <tr>
+                       <td>{{$blog->heading}}</td>
+                       <td>{{$blog->name}} {{$blog->lastname}}</td>
+                       <td>{{$blog->created_at}}</td>
+                   </tr>
+                @endforeach
+            </tbody>
+        </table>
 
     </body>
 </html>
