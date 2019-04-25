@@ -12,6 +12,9 @@ class BlogController extends Controller
 
         App::setlocale($lang);
 
+        session_start();
+        session()->put('language', $lang);
+
         $blogs = DB::select(
             'SELECT 
                       bt.heading, 
@@ -31,9 +34,22 @@ class BlogController extends Controller
         return view('layouts.app', ['blogs' => $blogs]);
     }
 
-    public function show($id) {
+    public function show($id, $language = null) {
 
-        $lang = App::getlocale();
+        session_start();
+
+        if (is_null($language)) {
+            
+            $lang = session()->get('language');
+            if(!isset($lang)) {
+                $lang = App::getlocale();
+            }
+
+        } else {
+            $lang = $language;
+            session()->put('language', $language);
+        }
+
 
         $blog = DB::table('blogs')
             ->select(
