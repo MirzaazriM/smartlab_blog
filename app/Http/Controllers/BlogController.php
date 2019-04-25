@@ -28,8 +28,7 @@ class BlogController extends Controller
                     WHERE bt.language = "' . $lang . '"
                     GROUP BY b.id');
 
-        //die(print_r($blogs));
-        return view('index', ['blogs' => $blogs]);
+        return view('layouts.app', ['blogs' => $blogs]);
     }
 
     public function show($id) {
@@ -51,7 +50,7 @@ class BlogController extends Controller
             ->where('blogs.id', $id)
             ->where('blog_translations.language', $lang)
             ->get();
-//die(print_r($blog));
+
         return view('pages.blog', ['blog' => $blog[0]]);
     }
 }
