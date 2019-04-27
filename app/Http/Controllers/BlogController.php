@@ -52,6 +52,7 @@ class BlogController extends Controller
 
 
         if ($preview == false) {
+
             $blog = DB::table('blogs')
                 ->select(
                     'blog_translations.heading',
@@ -66,7 +67,7 @@ class BlogController extends Controller
                 ->leftJoin('blog_translations', 'blogs.id', '=', 'blog_translations.blogs_id')
                 ->where('blogs.id', $id)
                 ->where('blogs.published', 'true')
-                ->where('blog_translations.language', $lang)
+                //->where('blog_translations.language', $lang)
                 ->get();
         } else {
 
@@ -83,7 +84,7 @@ class BlogController extends Controller
                 ->leftJoin('users', 'blogs.users_id', '=', 'users.id')
                 ->leftJoin('blog_translations', 'blogs.id', '=', 'blog_translations.blogs_id')
                 ->where('blogs.id', $id)
-                ->where('blog_translations.language', $lang)
+                //->where('blog_translations.language', $lang)
                 ->get();
         }
 
