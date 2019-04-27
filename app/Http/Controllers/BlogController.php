@@ -28,13 +28,13 @@ class BlogController extends Controller
                     FROM blogs AS b
                     LEFT JOIN users AS u ON b.users_id = u.id
                     LEFT JOIN blog_translations AS bt ON b.id = bt.blogs_id
-                    WHERE bt.language = "' . $lang . '"
+                    WHERE bt.language = "' . $lang . '" AND b.published = "true" 
                     GROUP BY b.id');
 
         return view('layouts.app', ['blogs' => $blogs]);
     }
 
-    public function show($id, $language = null) {
+    public function show($id, $language = null, $preview = false) {
 
         session_start();
 
@@ -51,21 +51,42 @@ class BlogController extends Controller
         }
 
 
-        $blog = DB::table('blogs')
-            ->select(
-                'blog_translations.heading',
-                'blog_translations.language',
-                'users.id',
-                'blogs.id',
-                'blogs.created_at',
-                'blog_translations.text',
-                'blog_translations.language'
-            )
-            ->leftJoin('users', 'blogs.users_id', '=', 'users.id')
-            ->leftJoin('blog_translations', 'blogs.id', '=', 'blog_translations.blogs_id')
-            ->where('blogs.id', $id)
-            ->where('blog_translations.language', $lang)
-            ->get();
+        if ($preview == false) {
+            $blog = DB::table('blogs')
+                ->select(
+                    'blog_translations.heading',
+                    'blog_translations.language',
+                    'users.id',
+                    'blogs.id',
+                    'blogs.created_at',
+                    'blog_translations.text',
+                    'blog_translations.language'
+                )
+                ->leftJoin('users', 'blogs.users_id', '=', 'users.id')
+                ->leftJoin('blog_translations', 'blogs.id', '=', 'blog_translations.blogs_id')
+                ->where('blogs.id', $id)
+                ->where('blogs.published', 'true')
+                ->where('blog_translations.language', $lang)
+                ->get();
+        } else {
+
+            $blog = DB::table('blogs')
+                ->select(
+                    'blog_translations.heading',
+                    'blog_translations.language',
+                    'users.id',
+                    'blogs.id',
+                    'blogs.created_at',
+                    'blog_translations.text',
+                    'blog_translations.language'
+                )
+                ->leftJoin('users', 'blogs.users_id', '=', 'users.id')
+                ->leftJoin('blog_translations', 'blogs.id', '=', 'blog_translations.blogs_id')
+                ->where('blogs.id', $id)
+                ->where('blog_translations.language', $lang)
+                ->get();
+        }
+
 
         return view('pages.blog', ['blog' => $blog[0]]);
     }
