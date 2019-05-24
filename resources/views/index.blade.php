@@ -118,12 +118,12 @@
     }
 
     .blog-icon-description {
-        margin-right: 20px;
+        margin-right: 15px;
         margin-left: 20px;
         overflow: hidden;
         color: white;
         font-family: "Source Sans Pro", sans-serif;
-        font-size: 1em;
+        font-size: 0.9em;
         opacity: 0 !important;
         transition: opacity 0.2s ease-in-out;
     }
@@ -670,9 +670,48 @@
         <div class="blog-bot-container">
             @foreach ($blogs as $blog)
             <a href="/blog/{{$blog->id}}" target="_blank" class="blog blog-hover">
-                <div class="blog-icon-container dev-icon">
-                    <span class="blog-icon-description">Development</span>
-                    <img src="images/dev-icon.svg" alt="" class="" />
+                <div class="blog-icon-container <?php switch ($blog->tag) {
+                                                    case "development":
+                                                        echo "dev-icon";
+                                                        break;
+                                                    case "onlinecourses":
+                                                        echo "courses-icon";
+                                                        break;
+                                                    case "moodle":
+                                                        echo "moodle-icon";
+                                                        break;
+                                                    case "educational";
+                                                        echo "video-icon";
+                                                        break;
+                                                } ?>">
+                    <span class="blog-icon-description"><?php switch ($blog->tag) {
+                                                            case "development":
+                                                                echo "Development";
+                                                                break;
+                                                            case "onlinecourses":
+                                                                echo "Online Courses";
+                                                                break;
+                                                            case "moodle":
+                                                                echo "Moodle";
+                                                                break;
+                                                            case "educational";
+                                                                echo "Video Animations";
+                                                                break;
+                                                        } ?></span>
+                    <img src="images/<?php switch ($blog->tag) {
+                                            case "development":
+                                                echo "dev-icon.svg";
+                                                break;
+                                            case "onlinecourses":
+                                                echo "online-courses-icon.svg";
+                                                break;
+                                            case "moodle":
+                                                echo "moodle-icon.svg";
+                                                break;
+                                            case "educational";
+                                                echo "video-icon.svg";
+                                                break;
+                                        } ?>" alt="" class="" />
                 </div>
                 <div class="img-container">
                     <img src={{$blog->image_path}} alt="blog post" />
