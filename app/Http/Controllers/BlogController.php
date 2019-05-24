@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
-    public function index($lang) {
+    public function index($lang)
+    {
 
         App::setlocale($lang);
 
@@ -17,7 +18,8 @@ class BlogController extends Controller
 
         $blogs = DB::select(
             'SELECT 
-                      bt.heading, 
+                      bt.heading,
+                      b.image_path, 
                       bt.text, 
                       u.name, 
                       u.lastname, 
@@ -29,22 +31,23 @@ class BlogController extends Controller
                     LEFT JOIN users AS u ON b.users_id = u.id
                     LEFT JOIN blog_translations AS bt ON b.id = bt.blogs_id
                     WHERE bt.language = "' . $lang . '" AND b.published = "true" 
-                    GROUP BY b.id');
+                    GROUP BY b.id'
+        );
 
         return view('layouts.app', ['blogs' => $blogs]);
     }
 
-    public function show($id, $language = null, $preview = false) {
+    public function show($id, $language = null, $preview = false)
+    {
 
         session_start();
 
         if (is_null($language)) {
-            
+
             $lang = session()->get('language');
-            if(!isset($lang)) {
+            if (!isset($lang)) {
                 $lang = App::getlocale();
             }
-
         } else {
             $lang = $language;
             session()->put('language', $language);
