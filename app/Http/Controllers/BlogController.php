@@ -21,8 +21,9 @@ class BlogController extends Controller
                       bt.heading,
                       b.image_path, 
                       bt.text, 
+                      bta.tag,
                       u.name, 
-                      u.lastname, 
+                      u.lastname,
                       DATE_FORMAT(b.created_at, \'%M %d, %Y\') AS created_at,  
                       b.id, 
                       b.published, 
@@ -30,6 +31,7 @@ class BlogController extends Controller
                     FROM blogs AS b
                     LEFT JOIN users AS u ON b.users_id = u.id
                     LEFT JOIN blog_translations AS bt ON b.id = bt.blogs_id
+                    LEFT JOIN blog_tags AS bta ON b.id = bta.id
                     WHERE bt.language = "' . $lang . '" AND b.published = "true" 
                     GROUP BY b.id'
         );
