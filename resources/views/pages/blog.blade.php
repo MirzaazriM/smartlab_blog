@@ -492,7 +492,7 @@
 </div>
 <main class="contain">
     <div class="blog-image-container">
-        <img class="blog-image" src={{"/images/augmented-reality-investment-e1473173317384.jpg"}} />
+        <img class="blog-image" src={{$blog->image_path}} />
         <button class="blog-back">
             <span>Back to blog</span>
             <img src={{"/images/back-to-home.svg"}} />
