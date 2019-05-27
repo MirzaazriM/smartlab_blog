@@ -894,13 +894,9 @@
     document.addEventListener("DOMContentLoaded", function(event) {
         let blogValue = document.querySelectorAll(".blog-value");
         let blogText = document.querySelectorAll(".blog-text");
-        let temp;
         console.log(blogText);
         for (let i = 0; i < blogValue.length; i++) {
-
-            temp = blogValue[i].value.replace(/<img .*?>/g, " ");
-
-            blogText[i].innerHTML = temp;
+            blogText[i].innerHTML = blogValue[i].value.replace(/<img .*?>/g, " ");
         }
     })
 </script>
