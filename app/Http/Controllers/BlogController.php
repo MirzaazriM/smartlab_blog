@@ -66,7 +66,8 @@ class BlogController extends Controller
                     'blogs.id',
                     'blogs.created_at',
                     'blog_translations.text',
-                    'blog_translations.language'
+                    'blog_translations.language',
+                    'blogs.image_path'
                 )
                 ->leftJoin('users', 'blogs.users_id', '=', 'users.id')
                 ->leftJoin('blog_translations', 'blogs.id', '=', 'blog_translations.blogs_id')
@@ -84,7 +85,8 @@ class BlogController extends Controller
                     'blogs.id',
                     'blogs.created_at',
                     'blog_translations.text',
-                    'blog_translations.language'
+                    'blog_translations.language',
+                    'blogs.image_path'
                 )
                 ->leftJoin('users', 'blogs.users_id', '=', 'users.id')
                 ->leftJoin('blog_translations', 'blogs.id', '=', 'blog_translations.blogs_id')
