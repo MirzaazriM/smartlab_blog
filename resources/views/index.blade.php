@@ -279,6 +279,7 @@
         display: block;
         font-family: "Montserrat", sans-serif;
         font-weight: bold;
+        white-space: nowrap;
     }
 
     .blog-section {
@@ -499,6 +500,8 @@
         top: -5px;
     }
 
+
+
     @media screen and (min-width: 2000px) {
         .blog-top-bg {
             top: -1050px;
@@ -612,7 +615,7 @@
                 <label><input type="checkbox" name="categories" value="development" />
                     Design</label>
                 <label><input type="checkbox" name="categories" value="video" />
-                    Design</label>
+                    Video</label>
             </div>
             <div class="blog-subscribe-form-right">
                 <p>
