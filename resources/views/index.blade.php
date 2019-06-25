@@ -91,7 +91,7 @@
     }
 
     .top-section {
-        padding-top: 350px;
+        padding-top: 150px;
     }
 
     .blog-icon-container {
@@ -333,7 +333,7 @@
         margin-top: 50px;
     }
 
-    .blog-top-content .p-font::after {
+    .blog-top-content p::after {
         position: absolute;
         content: "...";
         bottom: 0px;
@@ -347,9 +347,9 @@
 
     .blog-top-main {
         flex-basis: 66%;
-        -webkit-box-shadow: -1px -1px 25px 1px var(--shadow-color);
-        -moz-box-shadow: -1px -1px 25px 1px var(--shadow-color);
-        box-shadow: -1px -1px 25px 1px var(--shadow-color);
+        -webkit-box-shadow: -1px -1px 15px 1px var(--shadow-color);
+        -moz-box-shadow: -1px -1px 15px 1px var(--shadow-color);
+        box-shadow: -1px -1px 15px 1px var(--shadow-color);
         cursor: pointer;
         border-radius: 20px;
         display: flex;
@@ -362,9 +362,9 @@
 
     .blog-top-secondary {
         flex-basis: 32%;
-        -webkit-box-shadow: -1px -1px 25px 1px var(--shadow-color);
-        -moz-box-shadow: -1px -1px 25px 1px var(--shadow-color);
-        box-shadow: -1px -1px 25px 1px var(--shadow-color);
+        -webkit-box-shadow: -1px -1px 15px 1px var(--shadow-color);
+        -moz-box-shadow: -1px -1px 15px 1px var(--shadow-color);
+        box-shadow: -1px -1px 15px 1px var(--shadow-color);
         cursor: pointer;
         border-radius: 20px;
         display: flex;
@@ -392,9 +392,9 @@
     }
 
     .blog {
-        -webkit-box-shadow: -1px -1px 25px 1px var(--shadow-color);
-        -moz-box-shadow: -1px -1px 25px 1px var(--shadow-color);
-        box-shadow: -1px -1px 25px 1px var(--shadow-color);
+        -webkit-box-shadow: -1px -1px 10px 1px var(--shadow-color);
+        -moz-box-shadow: -1px -1px 10px 1px var(--shadow-color);
+        box-shadow: -1px -1px 10px 1px var(--shadow-color);
         flex-basis: 32%;
         text-align: center;
         max-height: 600px;
@@ -405,6 +405,7 @@
         cursor: pointer;
         transition: box-shadow 0.2s ease-in;
         margin-bottom: 40px;
+        margin-top: 20px;
         position: relative;
         text-decoration: none !important;
     }
@@ -435,7 +436,7 @@
         font-size: 1em;
         /* line-height: 1em; */
         padding-left: 5px;
-        padding-right: 10px;
+        padding-right: 50%;
         padding-bottom: 2px;
         background-color: white;
         font-weight: 500;
@@ -522,6 +523,14 @@
             top: -560px;
             right: -450px;
         }
+
+        .blog-top-main {
+            flex-basis: 60%;
+        }
+
+        .blog-top-secondary {
+            flex-basis: 38%;
+        }
     }
 
     @media screen and (max-width: 1024px) {
@@ -531,14 +540,29 @@
             width: 120%;
         }
 
+        .blog-top-container {
+            flex-wrap: wrap;
+
+        }
+
+        .blog-top-main {
+            flex-basis: 100%;
+            margin-bottom: 10px;
+        }
+
+        .blog-top-secondary {
+            flex-basis: 66%;
+        }
+
         .blog-subscribe-container {
             flex-direction: column;
+            align-items: flex-start;
         }
 
         .blog-subscribe-form {
             margin-left: 0;
             margin-top: 50px;
-            width: 95%;
+            width: 100%;
         }
     }
 
@@ -556,14 +580,29 @@
             margin-left: 0;
         }
 
+        .blog-top-container {
+
+            height: auto;
+            margin-bottom: 50px;
+        }
+
         .blog-subscribe-form-left {
             margin-bottom: 25px;
+        }
+
+        .blog-top-content {
+            margin-top: 85px;
+
+        }
+
+        .blog {
+            flex-basis: 49%;
         }
     }
 
     @media screen and (max-width: 425px) {
         .blog-subscribe-form {
-            width: 95%;
+            width: 100%;
         }
 
         .blog-subscribe-form-right div {
@@ -583,6 +622,26 @@
             margin-right: 0;
             padding: 10px;
             margin-bottom: 20px;
+        }
+
+        .button {
+            height: 50px;
+        }
+
+
+
+        .blog-top-content {
+            padding-right: 15px;
+            padding-left: 15px;
+            padding-bottom: 30px;
+        }
+
+        .blog-top-secondary {
+            flex-basis: 100%;
+        }
+
+        .blog {
+            flex-basis: 100%;
         }
     }
 </style>
@@ -733,158 +792,6 @@
                 </div>
             </a>
             @endforeach
-            <!--
-            <div class="blog blog-hover">
-                <div class="blog-icon-container video-icon">
-                    <img class="" src="images/video-icon.svg" alt="" />
-                </div>
-                <div class="img-container">
-                    <img src="images/blog-post-2.png" alt="blog post" />
-                    <svg class="wave" viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
-                        <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="stroke: none; fill: white;"></path>
-                    </svg>
-                </div>
-                <div>
-                    <h2 class="h3-font">Blog Title</h2>
-                    <p><span>05.07.2019.</span> <span>Haris M.</span></p>
-                    <p class="p-font ">
-                        Sed scelerisque vulputate dui at mattis. Donec porta, lorem in
-                        vehicula efficitur, est libero suscipit est, id sollicitudin urna
-                        diam non sapien. Quisque porttitor, dui non porttitor efficitur,
-                        ante magna pulvinar purus, sit amet pretium nunc ipsum vel libero.
-                        Suspendisse venenatis lacus hendrerit, porttitor massa ac,
-                        consequat lectus. Praesent tempor congue nulla, nec dictum purus
-                        viverra nec. Mauris at felis metus. Vivamus egestas libero ac
-                        lectus consequat ullamcorper. Vestibulum ullamcorper ornare quam,
-                        eget ullamcorper sem malesuada sit amet. Aliquam tincidunt
-                        eleifend nulla, non dignissim odio suscipit id. Praesent quis quam
-                        leo.
-                    </p>
-                </div>
-            </div>
-            <div class="blog blog-hover">
-                <div class="blog-icon-container moodle-icon">
-                    <img src="images/moodle-icon.svg" alt="" class="" />
-                </div>
-                <div class="img-container ">
-                    <img src="images/webinar-learning-experience-1170x769.jpg" alt="blog post" />
-                    <svg class="wave" viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
-                        <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="stroke: none; fill: white;"></path>
-                    </svg>
-                </div>
-                <div>
-                    <h2 class="h3-font">Blog Title</h2>
-                    <p><span>05.07.2019.</span> <span>Haris M.</span></p>
-                    <p class="p-font ">
-                        Quisque a nisi iaculis, finibus neque quis, consectetur nisi. Nam
-                        id sollicitudin orci. Sed interdum, ante sed condimentum laoreet,
-                        augue sem tempor ligula, sed viverra lorem purus sit amet turpis.
-                        Duis odio tortor, fermentum a leo a, tempus bibendum nisl. Nunc
-                        aliquet dui ut arcu pulvinar, a mollis orci porta. Suspendisse
-                        interdum nulla est. Curabitur eget metus congue, accumsan velit
-                        quis, lobortis arcu. Phasellus et dignissim erat. Sed quis est in
-                        magna suscipit pretium id eget leo. Mauris scelerisque
-                        pellentesque odio, id porta ligula efficitur a. Fusce in fermentum
-                        nulla. Etiam cursus enim non nisi sollicitudin posuere. Phasellus
-                        malesuada tempus magna ut varius. Quisque posuere ut metus in
-                        mattis. Duis molestie dui eget odio fringilla, sed porta enim
-                        venenatis.
-                    </p>
-                </div>
-            </div>
-            <div class="blog blog-hover">
-                <div class="blog-icon-container dev-icon">
-                    <img src="images/dev-icon.svg" alt="" class="" />
-                </div>
-                <div class="img-container">
-                    <img src="images/androidpit-youtube-hero-2-1-585x385.jpg" alt="blog post" />
-                    <svg class="wave" viewBox="0 0 500 500" preserveAspectRatio="xMinYMin meet">
-                        <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="stroke: none; fill: white;"></path>
-                    </svg>
-                </div>
-                <div>
-                    <h2 class="h3-font">Blog Title</h2>
-                    <p><span>05.07.2019.</span> <span>Haris M.</span></p>
-                    <p class="p-font">
-                        Morbi diam lorem, fermentum sit amet felis non, venenatis eleifend
-                        arcu. Vestibulum mauris nulla, aliquam eu consequat eget, mollis
-                        non sem. Cras massa enim, lobortis in sodales eu, lobortis a nisi.
-                        Fusce sodales accumsan nisl sit amet ullamcorper. Sed vel lorem
-                        nec quam luctus pellentesque at nec magna. Pellentesque ac luctus
-                        arcu, eu fermentum justo. Nulla pulvinar tellus at auctor tempus.
-                        Pellentesque habitant morbi tristique senectus et netus et
-                        malesuada fames ac turpis egestas. Curabitur lobortis bibendum
-                        metus id tempus. Nulla convallis tempor mauris, at blandit risus
-                        semper ac. Phasellus vel neque id felis tristique viverra.
-                        Praesent commodo, nunc eu imperdiet lobortis, quam tortor feugiat
-                        tortor, id convallis purus turpis et nibh.
-                    </p>
-                </div>
-            </div>
-            <div class="blog blog-hover">
-                <div class="blog-icon-container video-icon">
-                    <img src="images/video-icon.svg" alt="" />
-                </div>
-                <div class="img-container">
-                    <img src="images/augmented-reality-investment-e1473173317384.jpg" alt="blog post" />
-                    <svg class="wave" viewBox="0 0 500 500">
-                        <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="stroke: none; fill: white;"></path>
-                    </svg>
-                </div>
-
-                <div>
-                    <h2 class="h3-font">Blog Title</h2>
-                    <p><span>05.07.2019.</span> <span>Haris M.</span></p>
-                    <p class="p-font">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                        nunc odio, mollis in fringilla at, cursus aliquam felis. Curabitur
-                        in cursus orci. Vestibulum convallis lectus risus, at varius nisl
-                        egestas vel. Suspendisse laoreet ex quis odio aliquet mollis. Duis
-                        quis porta magna. Nam dignissim enim lectus, sit amet porta metus
-                        interdum a. Praesent pulvinar justo vel lectus dictum, at
-                        fermentum neque lobortis. Sed vitae nisl eget augue convallis
-                        convallis nec at nisi. Nullam fermentum lorem metus, sit amet
-                        tincidunt velit convallis non. Proin sed finibus mauris. Sed orci
-                        metus, fringilla sed sollicitudin at, efficitur in ipsum.
-                        Pellentesque egestas ex quis tempor sagittis. Integer at nulla
-                        scelerisque, luctus quam vel, feugiat sem. Donec molestie eu lacus
-                        ut egestas. Pellentesque urna justo, tempus a est sed, bibendum
-                        interdum nisl.
-                    </p>
-                </div>
-            </div>
-            <div class="blog blog-hover">
-                <div class="blog-icon-container moodle-icon">
-                    <img src="images/moodle-icon.svg" alt="" class="" />
-                </div>
-                <div class="img-container">
-                    <img src="images/augmented-reality-investment-e1473173317384.jpg" alt="blog post" />
-                    <svg class="wave" viewBox="0 0 500 500">
-                        <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="stroke: none; fill: white;"></path>
-                    </svg>
-                </div>
-
-                <div>
-                    <h2 class="h3-font">Blog Title</h2>
-                    <p><span>05.07.2019.</span> <span>Haris M.</span></p>
-                    <p class="p-font">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                        nunc odio, mollis in fringilla at, cursus aliquam felis. Curabitur
-                        in cursus orci. Vestibulum convallis lectus risus, at varius nisl
-                        egestas vel. Suspendisse laoreet ex quis odio aliquet mollis. Duis
-                        quis porta magna. Nam dignissim enim lectus, sit amet porta metus
-                        interdum a. Praesent pulvinar justo vel lectus dictum, at
-                        fermentum neque lobortis. Sed vitae nisl eget augue convallis
-                        convallis nec at nisi. Nullam fermentum lorem metus, sit amet
-                        tincidunt velit convallis non. Proin sed finibus mauris. Sed orci
-                        metus, fringilla sed sollicitudin at, efficitur in ipsum.
-                        Pellentesque egestas ex quis tempor sagittis. Integer at nulla
-                        scelerisque, luctus quam vel, feugiat sem. Donec molestie eu lacus
-                        ut egestas. Pellentesque urna justo, tempus a est sed, bibendum
-                        interdum nisl.
-                    </p>
-                </div>
-            </div> -->
         </div>
 
         <div class="divider-container">

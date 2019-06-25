@@ -1,3 +1,20 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- CSRF Token -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<title>{{ config('app.name', 'Smartlab') }}</title>
+
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}" defer></script>
+
+<!-- Fonts -->
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+<!-- Styles -->
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <style>
     :root {
         --shadow-color: rgba(0, 53, 145, 0.15);
@@ -10,8 +27,7 @@
     }
 
     body {
-        margin: 0 auto;
-        overflow-x: hidden;
+        margin: 0;
     }
 
     * {
@@ -79,15 +95,16 @@
 
     .blog-bg-container {
         position: absolute;
-        width: 100%;
-        height: 75vh;
-
+        width: 100vw;
+        height: 100%;
+        top: 0;
+        overflow-x: hidden;
     }
 
     .blog-top-bg {
         position: absolute;
-        top: -730px;
-        right: -600px;
+        top: -725px;
+        right: -639px;
         z-index: -100;
         width: 100%;
     }
@@ -120,7 +137,7 @@
 
         border-radius: 25px;
         margin-bottom: 100px;
-        margin-top: 350px;
+        margin-top: 150px;
     }
 
     .blog-image {
@@ -331,6 +348,10 @@
         font-weight: bolder;
     }
 
+    .margin-bottom {
+        margin-bottom: 50px;
+    }
+
     @media screen and (min-width: 2000px) {
         .blog-top-bg {
             top: -1050px;
@@ -355,8 +376,8 @@
 
     @media screen and (max-width: 1024px) {
         .blog-top-bg {
-            top: -466px;
-            right: -380px;
+            top: -436px;
+            right: -447px;
             width: 120%;
         }
 
@@ -377,9 +398,9 @@
 
     @media screen and (max-width: 768px) {
         .blog-top-bg {
-            top: -439px;
-            width: 150%;
-            right: -422px;
+            width: 147%;
+            right: -431px;
+            top: -436px;
         }
 
         .blog-back {
@@ -413,8 +434,18 @@
     }
 
     @media screen and (max-width: 425px) {
+        .contain {
+            width: 95%;
+        }
+
         .blog-subscribe-form {
             width: 95%;
+        }
+
+        .blog-top-bg {
+            right: -182px;
+            top: -187px;
+            width: 120%;
         }
 
         .blog-subscribe-form-right div {
@@ -465,36 +496,28 @@
             margin-right: 10px;
         }
     }
+
+    @media screen and (max-width: 320px) {
+        .blog-top-bg {
+            right: -130px;
+            top: -183px;
+            width: 156%;
+        }
+
+    }
 </style>
 
-<!--<p>Blog page</p>
-
-<p>{{$blog->heading}}</p>
-
-<hr>
-
-<div id="text">
-    <input id="hid" type="hidden" value="{{$blog->text}}">
-    {{$blog->text}}
-</div>
-
-<hr>
-
-<p>{{$blog->created_at}}</p>
-
-
--->
 <div class="blog-bg-container">
     <img class="blog-top-bg" src={{"/images/blog-top-bg.svg"}} />
     <img class="blog-circle1" src={{"/images/fluid-bright-circle.svg"}} />
     <img class="blog-circle2" src={{"/images/fluid-bright-circle.svg"}} />
     <img class="blog-circle3" src={{"/images/fluid-bright-circle.svg"}} />
 </div>
-<main class="contain">
+<div class="contain">
     <div class="blog-image-container">
         <img class="blog-image" src={{$blog->image_path}} />
         <button class="blog-back">
-            <span>Back to blog</span>
+            <a href=""><span>Back to blog</span></a>
             <img src={{"/images/back-to-home.svg"}} />
         </button>
 
@@ -562,13 +585,13 @@
             </div>
         </form>
     </div>
-    <div>
+    <div class="margin-bottom">
         <p class="h1-font recent">Recent Posts:</p>
         <div class="blog-recent-container">
 
             <div>
-                <h4 class="h2-font"></h4>
-                <p></p>
+                <h4 class="h2-font">Blog Post Name</h4>
+                <p>September 28.2019.</p>
             </div>
 
             <div class="blog-recent-padding-border ">
@@ -585,7 +608,7 @@
             </div>
         </div>
     </div>
-</main>
+</div>
 <script>
     (function() {
         document.getElementById("text").innerHTML = document.getElementById("hid").value;
