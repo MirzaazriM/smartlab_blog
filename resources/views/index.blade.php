@@ -3,7 +3,7 @@
         --shadow-color: rgba(0, 53, 145, 0.15);
         --button-bg-color: #4885fa;
         --button-bg-orange: #ff931f;
-        --h2-color: #4885fa;
+        --h2-color: #4885FA;
         --h1-color: #14213d;
         --p-color: #c9d6e2;
         --dev-icon: #f83f3f;
@@ -11,30 +11,72 @@
         scroll-behavior: smooth;
     }
 
-    body {
-        margin: 0 auto;
+    html {
         overflow-x: hidden;
     }
 
     * {
         box-sizing: border-box;
-        -webkit-font-smoothing: antialiased;
+        line-height: 1.2 !important;
+    }
+
+    body {
+        margin: 0 auto;
+        overflow-x: hidden;
+        background-color: white !important;
+        overflow-y: hidden !important;
     }
 
     .contain {
-        max-width: 1600px;
+        max-width: 1440px;
         width: 90%;
         margin: 0 auto;
     }
 
+    .bold {
+        font-weight: bold;
+    }
+
+    .h1-font {
+        font-family: "Montserrat", sans-serif;
+        font-weight: bold;
+        font-size: 2.5em;
+        margin-top: 0;
+        margin-bottom: 25px;
+        color: var(--h1-color);
+    }
+
+    .h2-font {
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.8em;
+        color: var(--h2-color) !important;
+    }
+
+    .p-font {
+        font-family: "Source Sans Pro", sans-serif !important;
+        font-size: 1.4em;
+        font-weight: 300;
+        color: var(--h1-color) !important;
+    }
+
+    .--p-font-white {
+        color: white !important;
+    }
+
+    .--h2-font-white-bold {
+        font-weight: bold !important;
+        color: white !important;
+    }
+
     .button {
+        font-family: "Montserrat", sans-serif;
         cursor: pointer;
         border: none;
         border-radius: 35px;
         width: 260px;
         height: 70px;
-        font-size: 1.4em !important;
-        font-weight: 500;
+        font-size: 1.2em !important;
+        font-weight: bold;
         color: white;
         background-color: var(--button-bg-color);
         border: 1px solid var(--button-bg-color);
@@ -62,27 +104,8 @@
         border: 1px solid var(--button-bg-orange) !important;
     }
 
-    .h1-font {
-        font-family: "Montserrat", sans-serif;
-        font-weight: bold;
-        font-size: 3em;
-        margin-top: 0;
-        margin-bottom: 25px;
-        color: var(--h1-color);
-    }
 
-    .h2-font {
-        font-family: "Montserrat", sans-serif;
-        font-size: 2em;
-        color: var(--h2-color);
-    }
 
-    .p-font {
-        font-family: "Source Sans Pro", sans-serif;
-        font-size: 1em !important;
-        font-weight: 300;
-        color: var(--h1-color);
-    }
 
     main {
         position: relative;
@@ -424,7 +447,7 @@
         text-overflow: ellipsis;
         font-size: 1.2em;
         line-height: 1.2;
-        height: 114px;
+        height: 120px;
         /* padding-bottom: 14px; */
     }
 
@@ -432,12 +455,12 @@
         position: absolute;
         content: "...";
         bottom: 0px;
-        right: 0;
+        right: 0px;
         font-size: 1em;
-        /* line-height: 1em; */
+        /* line-height: 1.4em; */
         padding-left: 5px;
         padding-right: 50%;
-        padding-bottom: 2px;
+        /* padding-bottom: 2px; */
         background-color: white;
         font-weight: 500;
     }
@@ -645,6 +668,7 @@
         }
     }
 </style>
+
 @section('content')
 
 <div class="blog-bg-container">
@@ -703,9 +727,9 @@
                     <img src="images/moodle-icon.svg" alt="" class="" />
                 </div>
                 <div class="blog-top-content">
-                    <h2 class="h2-font">Blog title goes here</h2>
-                    <span class="p-font">24.05.2019 - Haris M.</span>
-                    <p class="p-font">
+                    <h2 class="h2-font --h2-font-white-bold">Blog title goes here</h2>
+                    <span class="p-font --p-font-white">24.05.2019 - Haris M.</span>
+                    <p class="p-font --p-font-white">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
                         a lectus posuere, gravida magna ac, molestie mi. In id ipsum
                         eget magna maximus auctor eget a purus, a lectus posuere,
@@ -720,9 +744,9 @@
                     <img src="images/online-courses-icon.svg" alt="" class="" />
                 </div>
                 <div class="blog-top-content">
-                    <h2 class="h2-font">Blog title goest here</h2>
-                    <span class="p-font">24.05.2019 - Haris M.</span>
-                    <p class="p-font">
+                    <h2 class="h2-font --h2-font-white-bold">Blog title goest here</h2>
+                    <span class="p-font --p-font-white">24.05.2019 - Haris M.</span>
+                    <p class="p-font --p-font-white">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
                         a lectus posuere, gravida
                     </p>
@@ -776,7 +800,9 @@
                                         } ?>" alt="" class="" />
                 </div>
                 <div class="img-container">
-                    <img src={{$blog->image_path}} alt="blog post" />
+                    <img src='{{ $web_domain }}/{{($blog->image_path)}}' alt="blog post" />
+
+
                     <svg class="wave" viewBox="0 0 500 500">
                         <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="stroke: none; fill: white;"></path>
                     </svg>
@@ -785,7 +811,7 @@
                 <div>
                     <h2 class="h3-font">{{$blog->heading}}</h2>
                     <p><span>{{$blog->created_at}}</span> <span>{{$blog->name}}</span></p>
-                    <input class="blog-value" type="hidden" value='{{$blog->text}}'>
+                    <input class="blog-value" type="hidden" value=' {{$blog->text}}'>
                     <p class="p-font blog-text">
 
                     </p>
@@ -806,7 +832,8 @@
         let blogText = document.querySelectorAll(".blog-text");
         console.log(blogText);
         for (let i = 0; i < blogValue.length; i++) {
-            blogText[i].innerHTML = blogValue[i].value.replace(/<img .*?>/g, " ");
+            let temp = blogValue[i].value.replace(/(<([^>]+)>)/ig, "");;
+            blogText[i].innerHTML = temp;
         }
     })
 </script>

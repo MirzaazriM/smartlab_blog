@@ -35,8 +35,11 @@ class BlogController extends Controller
                     WHERE bt.language = "' . $lang . '" AND b.published = "true" 
                     GROUP BY b.id'
         );
-
-        return view('layouts.app', ['blogs' => $blogs]);
+        $web_domain = env('APP_URL', 'smartlab_web.localhost.com');
+        return view('layouts.app', [
+            'blogs' => $blogs,
+            'web_domain' => $web_domain
+        ]);
     }
 
     public function show($id, $language = null, $preview = false)
@@ -96,6 +99,11 @@ class BlogController extends Controller
         }
 
 
-        return view('pages.blog', ['blog' => $blog[0]]);
+        return view(
+            'pages.blog',
+            [
+                'blog' => $blog[0]
+            ]
+        );
     }
 }

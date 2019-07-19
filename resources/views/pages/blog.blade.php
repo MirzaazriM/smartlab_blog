@@ -15,6 +15,7 @@
 
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 <style>
     :root {
         --shadow-color: rgba(0, 53, 145, 0.15);
@@ -515,11 +516,11 @@
 </div>
 <div class="contain">
     <div class="blog-image-container">
-        <img class="blog-image" src={{$blog->image_path}} />
-        <button class="blog-back">
-            <a href=""><span>Back to blog</span></a>
-            <img src={{"/images/back-to-home.svg"}} />
-        </button>
+        <img class="blog-image" src="http://smartlab_web.localhost/{{$blog->image_path}}" />
+        <a href="{{ env("BLOG_DOMAIN")  }}/@if(App::getlocale()){{App::getlocale()}}@else en @endif"><button class="blog-back">
+                <span>Back to blog</span>
+                <img src={{"/images/back-to-home.svg"}} />
+            </button></a>
 
         <div class="blog-social">
             <div>
