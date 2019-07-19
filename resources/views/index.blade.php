@@ -52,6 +52,12 @@
         color: var(--h2-color) !important;
     }
 
+    .h3-font {
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.8em;
+        color: var(--h1-color) !important;
+    }
+
     .p-font {
         font-family: "Source Sans Pro", sans-serif !important;
         font-size: 1.4em;
@@ -800,7 +806,7 @@
                                         } ?>" alt="" class="" />
                 </div>
                 <div class="img-container">
-                    <img src='{{ $web_domain }}/{{($blog->image_path)}}' alt="blog post" />
+                    <img src='http://smartlab_web.localhost/{{($blog->image_path)}}' alt="blog post" />
 
 
                     <svg class="wave" viewBox="0 0 500 500">

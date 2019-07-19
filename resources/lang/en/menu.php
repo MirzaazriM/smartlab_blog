@@ -9,7 +9,7 @@ return [
     'sixth_item' => 'Admins',
     'seventh_item' => 'Blogs',
     'eight_item' => 'Logout',
-    'english_language' => 'English',
-    'german_language' => 'German',
-    'bosnian_language' => 'Bosnian'
+    'english_language' => 'En',
+    'german_language' => 'De',
+    'bosnian_language' => 'Ba'
 ];
