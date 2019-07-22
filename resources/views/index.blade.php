@@ -562,6 +562,8 @@
         }
     }
 
+
+
     @media screen and (max-width: 1024px) {
         .blog-top-bg {
             top: -466px;

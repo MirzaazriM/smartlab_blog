@@ -100,6 +100,7 @@
         height: 100%;
         top: 0;
         overflow-x: hidden;
+        overflow-y: hidden;
     }
 
     .blog-top-bg {

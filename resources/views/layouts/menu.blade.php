@@ -1,4 +1,18 @@
 <style>
+    :root {
+        --shadow-color: rgba(0, 53, 145, 0.15);
+        --button-bg-color: #4885fa;
+        --button-bg-orange: #ff931f;
+        --h2-color: #4885FA;
+        --h1-color: #14213d;
+        --p-color: #c9d6e2;
+        scroll-behavior: smooth;
+    }
+
+    nav {
+        transition: all 0.2s ease-in-out;
+    }
+
     #nav-top {
         height: 30px;
         margin-top: 15px;
@@ -89,6 +103,8 @@
 
     .nav-bot-right {
         display: flex;
+        overflow: hidden;
+        transition: all 0.2s ease-in-out;
     }
 
     .nav-bot .filters {
@@ -98,9 +114,23 @@
         border-radius: 35px;
         width: 200px;
         height: 60px;
-        font-size: 1.2em !important;
-        font-weight: bold;
+        font-size: 1.1em !important;
         padding: 10px 22px;
+        color: white;
+        transition: all 0.2s ease-in-out;
+        margin-left: 15px;
+    }
+
+    select:focus {
+        border-radius: 15px 15px 0 0 !important;
+    }
+
+    option:hover {
+        background-color: white;
+    }
+
+    .--blue-background {
+        background-color: var(--button-bg-color)
     }
 
     .search-container {
@@ -110,21 +140,255 @@
     .nav-bot .search {
         width: 250px;
         padding: 10px 22px;
+        color: unset !important;
+        font-family: "Source Sans Pro", sans-serif;
+        font-size: 1.4em;
+        cursor: text;
     }
 
     .search-label {
+        cursor: text;
         position: absolute;
         top: 50%;
-        left: 22px;
+        left: 37px;
         transform: translateY(-50%);
         font-family: "Source Sans Pro", sans-serif;
         font-style: italic;
         font-size: 1.4em;
         opacity: 0.5;
+        transition: all 0.2s ease-in-out;
     }
+
+    .nav-bot .search:focus+.search-label {
+        font-size: 1em;
+        top: 15%;
+    }
+
+    .home-text::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        position: absolute;
+        background-color: white;
+        left: 22px;
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+        clip-path: polygon(0 0, 0% 100%, 100% 100%);
+    }
+
+
+    .home-button {
+        position: relative;
+    }
+
+    .home-button:hover .home-text::before {
+        animation: move-left 1s ease-in-out forwards;
+    }
+
+    .select-option {
+        padding: 20px;
+    }
+
+    @keyframes move-left {
+        0% {
+            left: 22px;
+        }
+
+        33% {
+            left: 10px;
+        }
+
+        66% {
+            left: 15px;
+        }
+
+        100% {
+            left: 10px;
+        }
+    }
+
+
 
     .nav-bot .filters:focus {
         outline: none;
+    }
+
+    .padding-both {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        background-color: white;
+        transition: all 0.2s ease-in-out;
+    }
+
+    #search {
+        border: 1px solid white;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .nav-button {
+        display: none;
+    }
+
+    @media screen and (max-width: 1300px) {
+
+        .nav-bot-right {
+            width: 0;
+            animation-direction: forwards;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+            justify-content: flex-end;
+
+        }
+
+        .nav-bot-left {
+            flex-basis: 100%;
+        }
+
+        .nav-bot {
+            flex-wrap: wrap;
+        }
+
+        .margin-top-15 {
+            margin-top: 15px;
+        }
+
+        @keyframes width {
+            from {
+                width: 0px;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes width-reverse {
+            from {
+                width: 100%;
+            }
+
+            to {
+                width: 0px;
+            }
+        }
+
+        .nav-button {
+            height: 30px;
+            width: 30px;
+            display: inline-block;
+            position: absolute;
+            right: 5%;
+            top: 63px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .nav-button-inner {
+            height: 5px;
+            width: 30px;
+            display: inline-block;
+            background-color: var(--button-bg-color);
+            position: absolute;
+            top: 0;
+            border-radius: 2px;
+            animation-duration: .2s;
+            animation-timing-function: ease-in;
+            animation-fill-mode: forwards;
+        }
+
+        .nav-button-inner-before {
+            height: 5px;
+            width: 30px;
+            display: inline-block;
+            background-color: var(--button-bg-color);
+            position: absolute;
+            top: 10px;
+            border-radius: 2px;
+            animation-duration: .2s;
+            animation-timing-function: ease-in;
+            animation-fill-mode: forwards;
+        }
+
+        .nav-button-inner-after {
+            height: 5px;
+            width: 30px;
+            display: inline-block;
+            background-color: var(--button-bg-color);
+            position: absolute;
+            top: 20px;
+            border-radius: 2px;
+            animation-duration: .2s;
+            animation-timing-function: ease-in;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes navBtn {
+            from {
+                width: 30px;
+            }
+
+            to {
+                width: 0px;
+            }
+        }
+
+        @keyframes navBtnReverse {
+            from {
+                width: 0px;
+            }
+
+            to {
+                width: 30px;
+            }
+        }
+
+        @keyframes navBtnAfter {
+            from {
+                transform: rotate(0deg);
+                top: 20px;
+            }
+
+            to {
+                transform: rotate(-45deg);
+                top: 10px;
+            }
+        }
+
+        @keyframes navBtnAfterReverse {
+            from {
+                transform: rotate(-45deg);
+                top: 10px;
+            }
+
+            to {
+                transform: rotate(0deg);
+                top: 20px;
+            }
+        }
+
+        @keyframes navBtnBefore {
+            from {
+                transform: rotate(0deg);
+                top: 10px;
+            }
+
+            to {
+                transform: rotate(45deg);
+                top: 10px;
+            }
+        }
+
+        @keyframes navBtnBeforeReverse {
+            from {
+                transform: rotate(45deg);
+                top: 10px;
+            }
+
+            to {
+                transform: rotate(2deg);
+                top: 10px;
+            }
+        }
     }
 </style>
 
@@ -158,9 +422,9 @@
             <div class="nav-bot-left">
                 <div class="nav-logo-container">
                     <span>BLOG</span>
-                    <img class="nav-logo" src="{{ asset('images/smartlab-logo.svg') }}" alt="smartlab logo">
+                    <a href="https://staging.smartlab.ba/"><img class="nav-logo" src="{{ asset('images/smartlab-logo.svg') }}" alt="smartlab logo"></a>
                 </div>
-                <button class="filters">Home</button>
+                <a href="https://staging.smartlab.ba/"><button class="filters --blue-background home-button"><span class="home-text">Home</span></button></a>
             </div>
 
             <div class="nav-bot-right">
@@ -169,18 +433,23 @@
                     <label for="search" class="search-label">Search...</label>
                 </div>
 
-                <select class="filters">
+                <select class="filters --blue-background">
                     <option disabled selected>Category</option>
                     <option value="development">Development</option>
                     <option value="online-courses">Online courses</option>
                     <option value="educational">Educational</option>
                     <option value="moodle">Moodle</option>
                 </select>
-                <select class="filters">
+                <select class="filters --blue-background">
                     <option disabled selected>Sorty by</option>
                     <option value="newest">Development</option>
                     <option value="top-rated">Online courses</option>
                 </select>
+            </div>
+            <div id="nav-button" class="nav-button">
+                <div id="nav-button-inner" class="nav-button-inner"></div>
+                <div id="nav-button-inner-before" class="nav-button-inner-before"></div>
+                <div id="nav-button-inner-after" class="nav-button-inner-after"></div>
             </div>
         </div>
     </ul>
@@ -213,4 +482,56 @@
 
 </li>
 -->
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        let navTop = document.querySelector("#nav-top");
+        let navBot = document.querySelector(".nav-bot");
+        let nav = document.querySelector("nav");
+        let search = document.querySelector("#search");
+
+        function navTopHide() {
+            if (window.pageYOffset > 100) {
+                navTop.style.display = "none";
+                nav.classList.add("padding-both");
+                search.style.border = "1px solid #4885fa";
+                navButton.style.top = "35px";
+            } else {
+                navTop.style.display = "flex";
+                nav.classList.remove("padding-both");
+                navButton.style.top = "63px";
+                search.style.border = "1px solid white";
+            }
+        }
+        window.addEventListener("scroll", function(event) {
+            navTopHide();
+        });
+
+        let navButton = document.querySelector("#nav-button");
+        let navButtonInner = document.querySelector("#nav-button-inner");
+        let navButtonInnerAfter = document.querySelector("#nav-button-inner-after");
+        let navButtonInnerBefore = document.querySelector("#nav-button-inner-before");
+        let clicked = 0;
+        let navBotRight = document.querySelector(".nav-bot-right");
+        navButton.addEventListener("click", function(event) {
+            clicked++
+            if (clicked % 2 != 0) {
+                navButtonInner.style.animationName = "navBtn";
+                navButtonInnerAfter.style.animationName = "navBtnAfter";
+                navButtonInnerBefore.style.animationName = "navBtnBefore";
+                navBotRight.style.animationName = "width";
+                navBotRight.classList.add("margin-top-15");
+
+            } else {
+                navButtonInner.style.animationName = "navBtnReverse";
+                navButtonInnerAfter.style.animationName = "navBtnAfterReverse";
+                navButtonInnerBefore.style.animationName = "navBtnBeforeReverse";
+                navBotRight.style.animationName = "width-reverse";
+                navBotRight.classList.remove("margin-top-15");
+            }
+
+        })
+
+    });
+</script>
+
 @endsection

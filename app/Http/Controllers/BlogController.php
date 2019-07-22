@@ -37,8 +37,7 @@ class BlogController extends Controller
         );
         $web_domain = env('APP_URL', 'smartlab_web.localhost.com');
         return view('layouts.app', [
-            'blogs' => $blogs,
-            'web_domain' => $web_domain
+            'blogs' => $blogs
         ]);
     }
 
