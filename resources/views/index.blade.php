@@ -530,6 +530,82 @@
         top: -5px;
     }
 
+    main {
+        max-height: 100vh;
+    }
+
+    .coming-soon-container {
+        animation: height 2s ease-in-out forwards;
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        background-color: white;
+        clip-path:
+    }
+
+    .coming-soon-logo-container {
+        position: absolute;
+        top: 62px;
+        transform: translateX(-1px);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    @media screen and (max-width: 425px) {
+        .coming-soon-logo-container {
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .coming-soon-logo-container .button {
+            margin-top: 15px;
+        }
+
+    }
+
+    .coming-soon-logo-container .button {
+        animation: opacity 2s ease-in-out forwards;
+        width: 160px !important;
+        height: 50px !important;
+
+    }
+
+    .coming-soon-container p {
+        font-family: "Montserrat", sans-serif;
+        font-weight: bold;
+        font-size: 8vw;
+        margin-top: 0;
+        margin-bottom: 25px;
+        color: var(--h1-color);
+        text-shadow: 0px 0px 30px rgba(0, 53, 145, 1);
+        pointer-events: none;
+    }
+
+    @keyframes opacity {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes height {
+        from {
+            height: 0;
+        }
+
+        to {
+            height: 100vh;
+        }
+    }
+
 
 
     @media screen and (min-width: 2000px) {
@@ -678,7 +754,15 @@
 </style>
 
 @section('content')
-
+<div class="coming-soon-container">
+    <div class="coming-soon-logo-container contain">
+        <div>
+            <a href="https://stagingblog.smartlab.ba/"><img class="nav-logo" src="{{ asset('images/smartlab-logo.svg') }}" alt="smartlab logo"></a>
+        </div>
+        <a href="https://staging.smartlab.ba/"><button class="button"><span class="home-text">Home</span></button></a>
+    </div>
+    <p>Coming soon!</p>
+</div>
 <div class="blog-bg-container">
     <img class="blog-top-bg" src="images/blog-top-bg.svg" />
     <img class="blog-circle1" src="images/fluid-bright-circle.svg" />

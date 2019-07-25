@@ -121,8 +121,12 @@
         margin-left: 15px;
     }
 
-    select:focus {
+    .expanded {
         border-radius: 15px 15px 0 0 !important;
+    }
+
+    select:not(:focus) {
+        border-radius: 35px;
     }
 
     option:hover {
@@ -422,7 +426,7 @@
             <div class="nav-bot-left">
                 <div class="nav-logo-container">
                     <span>BLOG</span>
-                    <a href="https://staging.smartlab.ba/"><img class="nav-logo" src="{{ asset('images/smartlab-logo.svg') }}" alt="smartlab logo"></a>
+                    <a href="https://stagingblog.smartlab.ba/"><img class="nav-logo" src="{{ asset('images/smartlab-logo.svg') }}" alt="smartlab logo"></a>
                 </div>
                 <a href="https://staging.smartlab.ba/"><button class="filters --blue-background home-button"><span class="home-text">Home</span></button></a>
             </div>
@@ -511,7 +515,17 @@
         let navButtonInnerAfter = document.querySelector("#nav-button-inner-after");
         let navButtonInnerBefore = document.querySelector("#nav-button-inner-before");
         let clicked = 0;
+        let select = document.querySelectorAll("select");
         let navBotRight = document.querySelector(".nav-bot-right");
+        for (let i = 0; i < select.length; i++) {
+            console.log(select[i]);
+            select[i].addEventListener("click", function() {
+                select[i].classList.toggle("expanded");
+            })
+            select[i].addEventListener("blur", function() {
+                select[i].classList.remove("expanded");
+            })
+        }
         navButton.addEventListener("click", function(event) {
             clicked++
             if (clicked % 2 != 0) {
