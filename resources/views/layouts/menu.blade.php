@@ -431,6 +431,18 @@
             align-self: center;
             margin-bottom: 15px;
         }
+
+        .nav-top p>span:first-of-type {
+            display: none;
+        }
+
+        .nav-top p span {
+            margin-right: 5px;
+        }
+
+        #languageForm {
+            white-space: nowrap;
+        }
     }
 </style>
 

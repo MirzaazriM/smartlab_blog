@@ -751,6 +751,17 @@
         .blog {
             flex-basis: 100%;
         }
+
+        .top-section {
+            padding-top: 250px;
+        }
+
+        .blog-top-bg {
+            /* transform: scaleY(0.5); */
+            top: -573px;
+            width: 257%;
+            right: -598px;
+        }
     }
 </style>
 
