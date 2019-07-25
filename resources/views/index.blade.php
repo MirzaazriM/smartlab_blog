@@ -537,6 +537,7 @@
     .coming-soon-container {
         animation: height 2s ease-in-out forwards;
         width: 100vw;
+        height: 100vh;
         position: fixed;
         top: 0;
         left: 0;
@@ -545,7 +546,7 @@
         align-items: center;
         z-index: 10000;
         background-color: white;
-        clip-path:
+        clip-path: circle(10%);
     }
 
     .coming-soon-logo-container {
@@ -598,11 +599,11 @@
 
     @keyframes height {
         from {
-            height: 0;
+            clip-path: circle(10%);
         }
 
         to {
-            height: 100vh;
+            clip-path: circle(100%);
         }
     }
 
