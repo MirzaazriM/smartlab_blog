@@ -9,6 +9,12 @@
         scroll-behavior: smooth;
     }
 
+    .shadow {
+        -webkit-box-shadow: -1px -1px 15px 1px var(--shadow-color);
+        -moz-box-shadow: -1px -1px 15px 1px var(--shadow-color);
+        box-shadow: -1px -1px 15px 1px var(--shadow-color);
+    }
+
     nav {
         transition: all 0.2s ease-in-out;
     }
@@ -43,11 +49,16 @@
 
     .nav-top p span {
         margin-right: 20px;
+        color: white;
+    }
+
+    .nav-top p a:hover {
+        text-decoration: none;
     }
 
     #languageForm {
-        position: relative;
-        left: 20px;
+        /*position: relative;
+        left: 20px;*/
     }
 
     .nav-top label {
@@ -95,10 +106,13 @@
     .nav-bot {
         display: flex;
         justify-content: space-between;
+        transition: 0.2s all ease-in-out;
     }
 
     .nav-bot-left {
         display: flex;
+        flex-basis: calc(100% - 16px);
+        justify-content: space-between;
     }
 
     .nav-bot-right {
@@ -440,6 +454,14 @@
             margin-right: 5px;
         }
 
+        .home-button {
+            margin-left: 0 !important;
+        }
+
+        .nav-bot a {
+            align-self: center;
+        }
+
         #languageForm {
             white-space: nowrap;
         }
@@ -448,7 +470,6 @@
 
 <script>
     function changeSiteLanguage(value) {
-        console.log(value);
         document.getElementById("languageForm").submit();
     }
 </script>
@@ -459,7 +480,7 @@
 
         <div class="nav-top" id="nav-top">
 
-            <p><span>Call: </span><span>+387 61 811 394</span> <span>+387 33 956 222</span></p>
+            <p><span>Call: </span><a href="tel: +38761811394"><span>+387 61 811 394</span></a> <a href="tel: +38733956222"><span>+387 33 956 222</span></a></p>
             <form id="languageForm" action="/language" method="POST">
                 <!-- Form for sending new language after user clicks on one of the select options - page is refreshed with new language translations -->
                 @csrf
@@ -476,13 +497,13 @@
             <div class="nav-bot-left">
                 <div class="nav-logo-container">
                     <span>BLOG</span>
-                    <a href="https://stagingblog.smartlab.ba/"><img class="nav-logo" src="{{ asset('images/smartlab-logo.svg') }}" alt="smartlab logo"></a>
+                    <a href="{{env("BLOG_DOMAIN")}}"><img class="nav-logo" src="{{ asset('images/smartlab-logo.svg') }}" alt="smartlab logo"></a>
                 </div>
-                <a href="https://staging.smartlab.ba/"><button class="filters --blue-background home-button"><span class="home-text">Home</span></button></a>
+                <a href="{{env("WEB_DOMAIN")}}"><button class="filters --blue-background home-button"><span class="home-text">Home</span></button></a>
             </div>
 
             <div class="nav-bot-right">
-                <div class="search-container">
+                <!--<div class="search-container">
                     <input class="filters search" type="search" id="search" name="search">
                     <label for="search" class="search-label">Search...</label>
                 </div>
@@ -496,16 +517,16 @@
                 </select>
                 <select class="filters --blue-background">
                     <option disabled selected>Sorty by</option>
-                    <option value="newest">Development</option>
-                    <option value="top-rated">Online courses</option>
+                    <option value="newest">Newest</option>
+                    <option value="top-rated">Top Rated</option>
                 </select>
             </div>
             <div id="nav-button" class="nav-button">
                 <div id="nav-button-inner" class="nav-button-inner"></div>
                 <div id="nav-button-inner-before" class="nav-button-inner-before"></div>
                 <div id="nav-button-inner-after" class="nav-button-inner-after"></div>
+            </div>-->
             </div>
-        </div>
     </ul>
 </nav>
 <!--
@@ -536,66 +557,33 @@
 
 </li>
 -->
+
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
         let navTop = document.querySelector("#nav-top");
         let navBot = document.querySelector(".nav-bot");
         let nav = document.querySelector("nav");
-        let search = document.querySelector("#search");
 
-        function navTopHide() {
+        function handleScroll() {
+            console.log(window.pageYOffset)
             if (window.pageYOffset > 100) {
                 navTop.style.display = "none";
-                nav.classList.add("padding-both");
-                search.style.border = "1px solid #4885fa";
-                navButton.style.top = "35px";
+                navBot.style.marginTop = "10px";
+                navBot.style.marginBottom = "10px";
+                nav.style.backgroundColor = "white";
+                nav.classList.add("shadow");
             } else {
                 navTop.style.display = "flex";
-                nav.classList.remove("padding-both");
-                navButton.style.top = "63px";
-                search.style.border = "1px solid white";
+                navBot.style.marginTop = "0px";
+                navBot.style.marginBottom = "0px";
+                nav.style.backgroundColor = "transparent";
+                nav.classList.remove("shadow");
             }
         }
+        handleScroll();
         window.addEventListener("scroll", function(event) {
-            navTopHide();
+            handleScroll();
         });
-
-        let navButton = document.querySelector("#nav-button");
-        let navButtonInner = document.querySelector("#nav-button-inner");
-        let navButtonInnerAfter = document.querySelector("#nav-button-inner-after");
-        let navButtonInnerBefore = document.querySelector("#nav-button-inner-before");
-        let clicked = 0;
-        let select = document.querySelectorAll("select");
-        let navBotRight = document.querySelector(".nav-bot-right");
-        for (let i = 0; i < select.length; i++) {
-            console.log(select[i]);
-            select[i].addEventListener("click", function() {
-                select[i].classList.toggle("expanded");
-            })
-            select[i].addEventListener("blur", function() {
-                select[i].classList.remove("expanded");
-            })
-        }
-        navButton.addEventListener("click", function(event) {
-            clicked++
-            if (clicked % 2 != 0) {
-                navButtonInner.style.animationName = "navBtn";
-                navButtonInnerAfter.style.animationName = "navBtnAfter";
-                navButtonInnerBefore.style.animationName = "navBtnBefore";
-                navBotRight.style.animationName = "width";
-                navBotRight.classList.add("margin-top-15");
-
-            } else {
-                navButtonInner.style.animationName = "navBtnReverse";
-                navButtonInnerAfter.style.animationName = "navBtnAfterReverse";
-                navButtonInnerBefore.style.animationName = "navBtnBeforeReverse";
-                navBotRight.style.animationName = "width-reverse";
-                navBotRight.classList.remove("margin-top-15");
-            }
-
-        })
-
     });
 </script>
-
 @endsection

@@ -351,6 +351,18 @@
         overflow: hidden;
     }
 
+    .blog-top-content:after {
+        content: "...";
+        position: absolute;
+        display: inline-block;
+        right: 0px;
+        padding-right: 30px;
+        bottom: 0px;
+        padding-bottom: 32px;
+        font-size: 2.8em;
+        color: white;
+    }
+
     .blog-top-content h2,
     .blog-top-content p,
     .blog-top-content span {
@@ -379,6 +391,8 @@
         -webkit-box-shadow: -1px -1px 15px 1px var(--shadow-color);
         -moz-box-shadow: -1px -1px 15px 1px var(--shadow-color);
         box-shadow: -1px -1px 15px 1px var(--shadow-color);
+        padding-bottom: 2.8em;
+        overflow: hidden;
         cursor: pointer;
         border-radius: 20px;
         display: flex;
@@ -387,6 +401,11 @@
         background-size: cover;
         transition: all 0.2s ease-in-out;
         position: relative;
+        padding-top: 20%;
+    }
+
+    .blog-top-main:hover {
+        text-decoration: none;
     }
 
     .blog-top-secondary {
@@ -394,6 +413,8 @@
         -webkit-box-shadow: -1px -1px 15px 1px var(--shadow-color);
         -moz-box-shadow: -1px -1px 15px 1px var(--shadow-color);
         box-shadow: -1px -1px 15px 1px var(--shadow-color);
+        padding-bottom: 2.8em;
+        overflow: hidden;
         cursor: pointer;
         border-radius: 20px;
         display: flex;
@@ -402,6 +423,11 @@
         background-size: cover;
         transition: all 0.2s ease-in-out;
         position: relative;
+        padding-top: 20%;
+    }
+
+    .blog-top-secondary:hover {
+        text-decoration: none;
     }
 
     .blog-section .button {
@@ -531,7 +557,7 @@
     }
 
     main {
-        max-height: 100vh;
+        /* max-height: 100vh;*/
     }
 
     .coming-soon-container {
@@ -567,6 +593,13 @@
             margin-top: 15px;
         }
 
+        .blog-top-main {
+            max-height: 700px;
+        }
+
+        .blog-top-secondary {
+            max-height: 650px;
+        }
     }
 
     .coming-soon-logo-container .button {
@@ -766,7 +799,7 @@
 </style>
 
 @section('content')
-<div class="coming-soon-container">
+<!--<div class="coming-soon-container">
     <div class="coming-soon-logo-container contain">
         <div>
             <a href="https://stagingblog.smartlab.ba/"><img class="nav-logo" src="{{ asset('images/smartlab-logo.svg') }}" alt="smartlab logo"></a>
@@ -774,7 +807,7 @@
         <a href="https://staging.smartlab.ba/"><button class="button"><span class="home-text">Home</span></button></a>
     </div>
     <p>Coming soon!</p>
-</div>
+</div>-->
 <div class="blog-bg-container">
     <img class="blog-top-bg" src="images/blog-top-bg.svg" />
     <img class="blog-circle1" src="images/fluid-bright-circle.svg" />
@@ -824,42 +857,10 @@
     <img class="blog-section-bg" src="images/blue-orange-bg.svg" />
     <img class="blog-section-orange-circle" src="images/orange-circle.svg" />
     <div class="blog-container">
+        @foreach ($blogs as $blog)
+        @if($loop -> iteration == 1)
         <div class="blog-top-container">
-            <div class="blog-top-main blog-hover">
-                <div class="blog-icon-container moodle-icon">
-                    <span class="blog-icon-description">Moodle</span>
-                    <img src="images/moodle-icon.svg" alt="" class="" />
-                </div>
-                <div class="blog-top-content">
-                    <h2 class="h2-font --h2-font-white-bold">Blog title goes here</h2>
-                    <span class="p-font --p-font-white">24.05.2019 - Haris M.</span>
-                    <p class="p-font --p-font-white">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                        a lectus posuere, gravida magna ac, molestie mi. In id ipsum
-                        eget magna maximus auctor eget a purus, a lectus posuere,
-                        gravida magna ac, molestie mi. In id ipsum eget magna maximus
-                        auctor eget a purus
-                    </p>
-                </div>
-            </div>
-            <div class="blog-top-secondary blog-hover">
-                <div class="blog-icon-container courses-icon">
-                    <span class="blog-icon-description">Online Courses</span>
-                    <img src="images/online-courses-icon.svg" alt="" class="" />
-                </div>
-                <div class="blog-top-content">
-                    <h2 class="h2-font --h2-font-white-bold">Blog title goest here</h2>
-                    <span class="p-font --p-font-white">24.05.2019 - Haris M.</span>
-                    <p class="p-font --p-font-white">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                        a lectus posuere, gravida
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="blog-bot-container">
-            @foreach ($blogs as $blog)
-            <a href="/blog/{{$blog->id}}" target="_blank" class="blog blog-hover">
+            <a href="/blog/{{$blog->id}}" target="_blank" class="blog-top-main blog-hover">
                 <div class="blog-icon-container <?php switch ($blog->tag) {
                                                     case "development":
                                                         echo "dev-icon";
@@ -903,42 +904,158 @@
                                                 break;
                                         } ?>" alt="" class="" />
                 </div>
-                <div class="img-container">
-                    <img src='http://smartlab_web.localhost/{{($blog->image_path)}}' alt="blog post" />
-
-
-                    <svg class="wave" viewBox="0 0 500 500">
-                        <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="stroke: none; fill: white;"></path>
-                    </svg>
-                </div>
-
-                <div>
-                    <h2 class="h3-font">{{$blog->heading}}</h2>
-                    <p><span>{{$blog->created_at}}</span> <span>{{$blog->name}}</span></p>
+                <div class="blog-top-content">
+                    <h2 class="h2-font --h2-font-white-bold"> {{$blog->heading}}</h2>
+                    <p class="p-font --p-font-white"><span>"{{$blog->created_at}}"</span> <span>"{{$blog->name}}"</span></p>
                     <input class="blog-value" type="hidden" value=' {{$blog->text}}'>
-                    <p class="p-font blog-text">
+                    <p class="p-font --p-font-white blog-text">
 
                     </p>
                 </div>
             </a>
-            @endforeach
-        </div>
+            @endif
+            @if($loop -> iteration == 2)
+            <a href="/blog/{{$blog->id}}" target="_blank" class="blog-top-secondary blog-hover">
+                <div class="blog-icon-container <?php switch ($blog->tag) {
+                                                    case "development":
+                                                        echo "dev-icon";
+                                                        break;
+                                                    case "onlinecourses":
+                                                        echo "courses-icon";
+                                                        break;
+                                                    case "moodle":
+                                                        echo "moodle-icon";
+                                                        break;
+                                                    case "educational";
+                                                        echo "video-icon";
+                                                        break;
+                                                } ?>">
+                    <span class="blog-icon-description"><?php switch ($blog->tag) {
+                                                            case "development":
+                                                                echo "Development";
+                                                                break;
+                                                            case "onlinecourses":
+                                                                echo "Online Courses";
+                                                                break;
+                                                            case "moodle":
+                                                                echo "Moodle";
+                                                                break;
+                                                            case "educational";
+                                                                echo "Video Animations";
+                                                                break;
+                                                        } ?></span>
+                    <img src="images/<?php switch ($blog->tag) {
+                                            case "development":
+                                                echo "dev-icon.svg";
+                                                break;
+                                            case "onlinecourses":
+                                                echo "online-courses-icon.svg";
+                                                break;
+                                            case "moodle":
+                                                echo "moodle-icon.svg";
+                                                break;
+                                            case "educational";
+                                                echo "video-icon.svg";
+                                                break;
+                                        } ?>" alt="" class="" />
+                </div>
+                <div class="blog-top-content">
+                    <h2 class="h2-font --h2-font-white-bold">{{$blog->heading}}</h2>
+                    <p class="p-font --p-font-white"><span>{{$blog->created_at}}</span> <span>{{$blog->name}}</span></p>
+                    <input class="blog-value" type="hidden" value=' {{$blog->text}}'>
+                    <p class="p-font --p-font-white blog-text">
 
-        <div class="divider-container">
+                    </p>
+                </div>
+            </a>
+        </div>
+        @endif
+        @if($loop->iteration > 2)
+
+        <a href="/blog/{{$blog->id}}" target="_blank" class="blog blog-hover">
+            <div class="blog-icon-container <?php switch ($blog->tag) {
+                                                case "development":
+                                                    echo "dev-icon";
+                                                    break;
+                                                case "onlinecourses":
+                                                    echo "courses-icon";
+                                                    break;
+                                                case "moodle":
+                                                    echo "moodle-icon";
+                                                    break;
+                                                case "educational";
+                                                    echo "video-icon";
+                                                    break;
+                                            } ?>">
+                <span class="blog-icon-description"><?php switch ($blog->tag) {
+                                                        case "development":
+                                                            echo "Development";
+                                                            break;
+                                                        case "onlinecourses":
+                                                            echo "Online Courses";
+                                                            break;
+                                                        case "moodle":
+                                                            echo "Moodle";
+                                                            break;
+                                                        case "educational";
+                                                            echo "Video Animations";
+                                                            break;
+                                                    } ?></span>
+                <img src="images/<?php switch ($blog->tag) {
+                                        case "development":
+                                            echo "dev-icon.svg";
+                                            break;
+                                        case "onlinecourses":
+                                            echo "online-courses-icon.svg";
+                                            break;
+                                        case "moodle":
+                                            echo "moodle-icon.svg";
+                                            break;
+                                        case "educational";
+                                            echo "video-icon.svg";
+                                            break;
+                                    } ?>" alt="" class="" />
+            </div>
+            <div class="img-container">
+                <img src='http://smartlab_web.localhost/{{($blog->image_path)}}' alt="blog post" />
+
+
+                <svg class="wave" viewBox="0 0 500 500">
+                    <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z" style="stroke: none; fill: white;"></path>
+                </svg>
+            </div>
+
+            <div>
+                <h2 class="h3-font">{{$blog->heading}}</h2>
+                <p><span>{{$blog->created_at}}</span> <span>{{$blog->name}}</span></p>
+                <input class="blog-value" type="hidden" value=' {{$blog->text}}'>
+                <p class="p-font blog-text">
+
+                </p>
+            </div>
+        </a>
+
+        @endif
+
+        @endforeach
+
+
+
+        <!--<div class="divider-container">
             <div class="divider"></div>
             <button class="button button-orange">Load More</button>
-        </div>
+        </div>-->
     </div>
 </section>
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
         let blogValue = document.querySelectorAll(".blog-value");
         let blogText = document.querySelectorAll(".blog-text");
-        console.log(blogText);
         for (let i = 0; i < blogValue.length; i++) {
             let temp = blogValue[i].value.replace(/(<([^>]+)>)/ig, "");;
             blogText[i].innerHTML = temp;
         }
+
     })
 </script>
 @endsection

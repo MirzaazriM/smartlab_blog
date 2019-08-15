@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/{lang}', 'BlogController@index');
+Route::get('/{lang?}', 'BlogController@index');
 Route::get('/blog/{id}/{language?}/{preview?}', 'BlogController@show');
 
 Route::put('/language', 'LanguageController@switchLanguage');

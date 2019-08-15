@@ -1,21 +1,3 @@
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- CSRF Token -->
-<meta name="csrf-token" content="{{ csrf_token() }}">
-
-<title>{{ config('app.name', 'Smartlab') }}</title>
-
-<!-- Scripts -->
-<script src="{{ asset('js/app.js') }}" defer></script>
-
-<!-- Fonts -->
-<link rel="dns-prefetch" href="//fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
-<!-- Styles -->
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
 <style>
     :root {
         --shadow-color: rgba(0, 53, 145, 0.15);
@@ -350,6 +332,10 @@
         font-weight: bolder;
     }
 
+    .recent-blogs:hover {
+        text-decoration: none;
+    }
+
     .margin-bottom {
         margin-bottom: 50px;
     }
@@ -497,6 +483,8 @@
         .blog-social div {
             margin-right: 10px;
         }
+
+
     }
 
     @media screen and (max-width: 320px) {
@@ -508,7 +496,8 @@
 
     }
 </style>
-
+@extends('layouts.app')
+@section('content')
 <div class="blog-bg-container">
     <img class="blog-top-bg" src={{"/images/blog-top-bg.svg"}} />
     <img class="blog-circle1" src={{"/images/fluid-bright-circle.svg"}} />
@@ -517,7 +506,7 @@
 </div>
 <div class="contain">
     <div class="blog-image-container">
-        <img class="blog-image" src="http://smartlab_web.localhost/{{$blog->image_path}}" />
+        <img class="blog-image" src="https://smartlab.ba/{{$blog->image_path}}" />
         <a href="{{ env("BLOG_DOMAIN")  }}/@if(App::getlocale()){{App::getlocale()}}@else en @endif"><button class="blog-back">
                 <span>Back to blog</span>
                 <img src={{"/images/back-to-home.svg"}} />
@@ -539,7 +528,8 @@
         <h1 class="h1-font">{{$blog->heading}}</h1>
         <div class="blog-content-h3">
             <h3 class="h2-font">
-                {{$blog->heading}} <span>Treba se dodati podnaslov za blogove</span>
+                {{$blog->heading}}
+                <!--<span>Treba se dodati podnaslov za blogove</span>-->
             </h3>
             <span>{{$blog->created_at}} - name</span>
         </div>
@@ -590,24 +580,13 @@
     <div class="margin-bottom">
         <p class="h1-font recent">Recent Posts:</p>
         <div class="blog-recent-container">
-
-            <div>
-                <h4 class="h2-font">Blog Post Name</h4>
-                <p>September 28.2019.</p>
-            </div>
-
-            <div class="blog-recent-padding-border ">
-                <h4 class="h2-font">Blog Post Name</h4>
-                <p>September 28.2019.</p>
-            </div>
-            <div class="blog-recent-padding-border ">
-                <h4 class="h2-font">Blog Post Name</h4>
-                <p>September 28.2019.</p>
-            </div>
-            <div class="blog-recent-padding-border ">
-                <h4 class="h2-font">Blog Post Name</h4>
-                <p>September 28.2019.</p>
-            </div>
+            @foreach($blogs as $blog)
+            @if($loop -> iteration <=4) <a class="recent-blogs" href="/blog/{{$blog->id}}" target="_blank">
+                <h4 class="h2-font">{{$blog -> heading}}</h4>
+                <p>{{$blog->created_at}}</p>
+                </a>
+                @endif
+                @endforeach
         </div>
     </div>
 </div>
@@ -616,3 +595,4 @@
         document.getElementById("text").innerHTML = document.getElementById("hid").value;
     })();
 </script>
+@endsection
