@@ -499,7 +499,7 @@
                     <span>BLOG</span>
                     <a href="{{env("BLOG_DOMAIN")}}"><img class="nav-logo" src="{{ asset('images/smartlab-logo.svg') }}" alt="smartlab logo"></a>
                 </div>
-                <a href="{{env("WEB_DOMAIN")}}"><button class="filters --blue-background home-button"><span class="home-text">Home</span></button></a>
+                <a href="{{env("APP_URL")}}"><button class="filters --blue-background home-button"><span class="home-text">Home</span></button></a>
             </div>
 
             <div class="nav-bot-right">

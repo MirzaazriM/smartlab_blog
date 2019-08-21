@@ -320,6 +320,8 @@
         position: absolute;
         left: -1200px;
         bottom: 0;
+        width: 100%;
+        z-index: -100;
     }
 
     .blog-section-orange-circle {
@@ -857,6 +859,7 @@
     <img class="blog-section-bg" src="images/blue-orange-bg.svg" />
     <img class="blog-section-orange-circle" src="images/orange-circle.svg" />
     <div class="blog-container">
+
         @foreach ($blogs as $blog)
         @if($loop -> iteration == 1)
         <div class="blog-top-container">
@@ -973,17 +976,22 @@
         @if($loop->iteration > 2)
 
         <a href="/blog/{{$blog->id}}" target="_blank" class="blog blog-hover">
-            <div class="blog-icon-container <?php switch ($blog->tag) {
+            <div class="blog-icon-container <?php
+                                            switch ($blog->tag) {
                                                 case "development":
+
                                                     echo "dev-icon";
                                                     break;
                                                 case "onlinecourses":
+
                                                     echo "courses-icon";
                                                     break;
                                                 case "moodle":
+
                                                     echo "moodle-icon";
                                                     break;
                                                 case "educational";
+
                                                     echo "video-icon";
                                                     break;
                                             } ?>">
@@ -1017,7 +1025,7 @@
                                     } ?>" alt="" class="" />
             </div>
             <div class="img-container">
-                <img src='http://smartlab_web.localhost/{{($blog->image_path)}}' alt="blog post" />
+                <img src='https://smartlab.ba{{($blog->image_path)}}' alt="blog post" />
 
 
                 <svg class="wave" viewBox="0 0 500 500">

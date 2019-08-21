@@ -340,6 +340,17 @@
         margin-bottom: 50px;
     }
 
+    #description {
+        visibility: hidden;
+    }
+
+    .blog-social a {
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        border-radius: 50%;
+    }
+
     @media screen and (min-width: 2000px) {
         .blog-top-bg {
             top: -1050px;
@@ -497,7 +508,10 @@
     }
 </style>
 @extends('layouts.app')
+@section('description', clean($blog->text))
 @section('content')
+<?php $actual_link = "http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+?>
 <div class="blog-bg-container">
     <img class="blog-top-bg" src={{"/images/blog-top-bg.svg"}} />
     <img class="blog-circle1" src={{"/images/fluid-bright-circle.svg"}} />
@@ -514,7 +528,7 @@
 
         <div class="blog-social">
             <div>
-                <img src={{"/images/fb-blog-share.svg"}} />
+                <a id="share-btn"><img src={{"/images/fb-blog-share.svg"}} /></a>
             </div>
             <div>
                 <img src={{"/images/twitter-share.svg"}} />
@@ -531,10 +545,14 @@
                 {{$blog->heading}}
                 <!--<span>Treba se dodati podnaslov za blogove</span>-->
             </h3>
-            <span>{{$blog->created_at}} - name</span>
+            <span>{{$blog->created_at}}</span>
         </div>
         <div>
             <input id="hid" type="hidden" value="{{$blog->text}}">
+            <?php function clean($string)
+            {
+                return trim(urldecode(html_entity_decode(strip_tags($string))));
+            } ?>
             <p class="p-font" id="text">
                 {{$blog->text}}
             </p>
@@ -591,8 +609,31 @@
     </div>
 </div>
 <script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: '438991246698405', // you need to create an facebook app
+            autoLogAppEvents: true,
+            xfbml: true,
+            version: 'v4.0'
+        });
+    };
+</script>
+<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        document.getElementById("share-btn").addEventListener('click', function() {
+            console.log("clicked")
+            FB.ui({
+                method: 'share',
+                href: location.href, // Current url
+            }, function(response) {});
+        });
+
+    });
+
     (function() {
         document.getElementById("text").innerHTML = document.getElementById("hid").value;
+
     })();
 </script>
 @endsection
