@@ -810,6 +810,11 @@
     </div>
     <p>Coming soon!</p>
 </div>-->
+<div class="loader-container">
+    <div class="css-animation-container">
+        <div class="css-animation"></div>
+    </div>
+</div>
 <div class="blog-bg-container">
     <img class="blog-top-bg" src="images/blog-top-bg.svg" />
     <img class="blog-circle1" src="images/fluid-bright-circle.svg" />
@@ -909,7 +914,7 @@
                 </div>
                 <div class="blog-top-content">
                     <h2 class="h2-font --h2-font-white-bold"> {{$blog->heading}}</h2>
-                    <p class="p-font --p-font-white"><span>"{{$blog->created_at}}"</span> <span>"{{$blog->name}}"</span></p>
+                    <p class="p-font --p-font-white"><span>{{$blog->created_at}}</span> <span>{{$blog->name}}</span></p>
                     <input class="blog-value" type="hidden" value=' {{$blog->text}}'>
                     <p class="p-font --p-font-white blog-text">
 
@@ -1063,7 +1068,11 @@
             let temp = blogValue[i].value.replace(/(<([^>]+)>)/ig, "");;
             blogText[i].innerHTML = temp;
         }
-
-    })
+        let loaderContainer = document.querySelector(".loader-container");
+        loaderContainer.classList.add("loaderEnd");
+        setTimeout(function() {
+            loaderContainer.style.display = "none";
+        }, 1000)
+    });
 </script>
 @endsection

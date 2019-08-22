@@ -512,6 +512,11 @@
 @section('content')
 <?php $actual_link = "http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 ?>
+<div class="loader-container">
+    <div class="css-animation-container">
+        <div class="css-animation"></div>
+    </div>
+</div>
 <div class="blog-bg-container">
     <img class="blog-top-bg" src={{"/images/blog-top-bg.svg"}} />
     <img class="blog-circle1" src={{"/images/fluid-bright-circle.svg"}} />
@@ -628,6 +633,11 @@
                 href: location.href, // Current url
             }, function(response) {});
         });
+        let loaderContainer = document.querySelector(".loader-container");
+        loaderContainer.classList.add("loaderEnd");
+        setTimeout(function() {
+            loaderContainer.style.display = "none";
+        }, 1000)
 
     });
 
