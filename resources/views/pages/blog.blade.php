@@ -351,6 +351,10 @@
         border-radius: 50%;
     }
 
+    .recent-blogs {
+        margin-bottom: 25px;
+    }
+
     @media screen and (min-width: 2000px) {
         .blog-top-bg {
             top: -1050px;
@@ -402,6 +406,15 @@
             top: -436px;
         }
 
+        .blog-recent-container {
+            flex-wrap: wrap;
+        }
+
+        .recent-blogs {
+            flex-basis: 50%;
+
+        }
+
         .blog-back {
             width: 50px;
             height: 50px;
@@ -435,6 +448,10 @@
     @media screen and (max-width: 425px) {
         .contain {
             width: 95%;
+        }
+
+        .recent-blogs {
+            flex-basis: 100%;
         }
 
         .blog-subscribe-form {
@@ -600,7 +617,7 @@
             </div>
         </form>
     </div>
-    <div class="margin-bottom">
+    <div>
         <p class="h1-font recent">Recent Posts:</p>
         <div class="blog-recent-container">
             @foreach($blogs as $blog)

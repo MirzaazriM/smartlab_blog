@@ -678,7 +678,7 @@
 
     @media screen and (max-width: 1024px) {
         .blog-top-bg {
-            top: -466px;
+            top: -520px;
             right: -380px;
             width: 120%;
         }
@@ -711,9 +711,10 @@
 
     @media screen and (max-width: 768px) {
         .blog-top-bg {
-            top: -439px;
-            width: 150%;
-            right: -422px;
+            top: -562px;
+            width: 153%;
+            right: -476px;
+            transform: rotate(-8deg);
         }
 
         .blog-subscribe-form {
@@ -768,7 +769,7 @@
         }
 
         .button {
-            height: 50px;
+            height: 60px;
         }
 
 
@@ -788,14 +789,32 @@
         }
 
         .top-section {
-            padding-top: 250px;
+            padding-top: 160px;
         }
 
         .blog-top-bg {
-            /* transform: scaleY(0.5); */
-            top: -573px;
-            width: 257%;
-            right: -598px;
+            top: -409px;
+            width: 228%;
+            right: -523px;
+            transform: rotate(-6deg);
+        }
+    }
+
+    @media screen and (max-width: 375px) {
+        .blog-top-bg {
+            top: -419px;
+            width: 249%;
+            right: -533px;
+            transform: rotate(-7deg);
+        }
+    }
+
+    @media screen and (max-width: 320px) {
+        .blog-top-bg {
+            top: -392px;
+            width: 247%;
+            right: -385px;
+            transform: rotate(-7deg);
         }
     }
 </style>
@@ -840,7 +859,7 @@
                 <label><input type="checkbox" name="categories" value="online_courses" />
                     Online Courses</label>
                 <label><input type="checkbox" name="categories" value="development" />
-                    Design</label>
+                    Development</label>
                 <label><input type="checkbox" name="categories" value="video" />
                     Video</label>
             </div>

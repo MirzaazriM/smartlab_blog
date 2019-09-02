@@ -32,7 +32,7 @@ class BlogController extends Controller
                     LEFT JOIN users AS u ON b.users_id = u.id
                     LEFT JOIN blog_translations AS bt ON b.id = bt.blogs_id
                     LEFT JOIN blog_tags AS bta ON b.id = bta.id
-                    WHERE bt.language = "' . $lang . '" AND b.published = "true" AND b.deleted_at IS NULL
+                    WHERE b.published = "true" AND b.deleted_at IS NULL
                     GROUP BY b.id ORDER BY b.created_at DESC'
         );
         return view('layouts.app', [

@@ -432,10 +432,7 @@
     }
 
     @media screen and (max-width: 425px) {
-        .nav-bot-left {
-            flex-direction: column;
 
-        }
 
         .nav-button {
             top: 130px;
@@ -443,7 +440,6 @@
 
         .nav-logo-container {
             align-self: center;
-            margin-bottom: 15px;
         }
 
         .nav-top p>span:first-of-type {
@@ -464,6 +460,44 @@
 
         #languageForm {
             white-space: nowrap;
+        }
+    }
+
+    @media screen and (max-width: 425px) {
+        .nav-bot .filters {
+            width: 150px;
+            height: 50px;
+        }
+
+        .nav-top {
+            justify-content: space-between;
+        }
+
+        .nav-top p {
+            margin-right: 0;
+        }
+
+        .nav-logo {
+            height: 35px;
+            width: 110px;
+        }
+
+        nav {
+            top: -2px;
+        }
+    }
+
+    @media screen and (max-width: 425px) {
+        .nav-top p {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+
+        #nav-top {
+            height: auto;
+            align-items: center;
+            margin-bottom: 15px;
         }
     }
 </style>
