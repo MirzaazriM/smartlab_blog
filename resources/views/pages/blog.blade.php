@@ -644,7 +644,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
         document.getElementById("share-btn").addEventListener('click', function() {
-            console.log("clicked")
             FB.ui({
                 method: 'share',
                 href: location.href, // Current url

@@ -399,7 +399,7 @@
         border-radius: 20px;
         display: flex;
         flex-direction: column-reverse;
-        background-image: url(images/blog-post-1.png);
+        background-image: url(images/blog-post-1.jpg);
         background-size: cover;
         transition: all 0.2s ease-in-out;
         position: relative;
@@ -421,7 +421,7 @@
         border-radius: 20px;
         display: flex;
         flex-direction: column-reverse;
-        background-image: url(images/blog-post-2.png);
+        background-image: url(images/blog-post-2.jpg);
         background-size: cover;
         transition: all 0.2s ease-in-out;
         position: relative;

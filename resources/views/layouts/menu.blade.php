@@ -599,7 +599,6 @@
         let nav = document.querySelector("nav");
 
         function handleScroll() {
-            console.log(window.pageYOffset)
             if (window.pageYOffset > 100) {
                 navTop.style.display = "none";
                 navBot.style.marginTop = "10px";
