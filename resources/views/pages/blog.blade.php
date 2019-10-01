@@ -18,6 +18,10 @@
         -webkit-font-smoothing: antialiased;
     }
 
+    #blog-text ul {
+        padding-left: 16px !important;
+    }
+
     .contain {
         max-width: 1600px;
         width: 90%;
@@ -126,8 +130,8 @@
 
     .blog-image {
         width: 100%;
-
-        object-fit: contain;
+        object-fit: cover;
+        max-height: 525px;
         border-radius: 25px;
     }
 
@@ -140,7 +144,7 @@
         transform: translateY(45%);
         bottom: 0;
         left: 20px;
-        z-index: 100;
+        z-index: 99;
         border: none;
         background-color: var(--button-bg-orange);
         transition: all 0.2s ease-in-out;
@@ -562,73 +566,75 @@
     </div>
     <div class="blog-content">
         <h1 class="h1-font">{{$blog->heading}}</h1>
-        <div class="blog-content-h3">
+        <span>{{$blog->created_at}}</span>
+        <!--<div class="blog-content-h3">
             <h3 class="h2-font">
                 {{$blog->heading}}
-                <!--<span>Treba se dodati podnaslov za blogove</span>-->
-            </h3>
-            <span>{{$blog->created_at}}</span>
-        </div>
-        <div>
-            <input id="hid" type="hidden" value="{{$blog->text}}">
+                <span>Treba se dodati podnaslov za blogove</span>
+            </h3>-->
+
+    </div>
+    <div id="blog-text">
+        <input id="hid" type="hidden" value="{{$blog->text}}">
+
+        <p class="p-font" id="text">
+            {{$blog->text}}
             <?php function clean($string)
             {
                 return trim(urldecode(html_entity_decode(strip_tags($string))));
             } ?>
-            <p class="p-font" id="text">
-                {{$blog->text}}
-            </p>
-        </div>
+        </p>
     </div>
-    <div class="blog-subscribe-container">
-        <div>
-            <h1 class="h1-font">SmartLab Blog</h1>
-            <p class="p-font">
-                Stay up to date with the latest design, video, develop, and
-                programming news.
-            </p>
-        </div>
-
-        <form class="blog-subscribe-form">
-            <div class="blog-subscribe-form-left">
-                <h3 class="h1-font">Subscribe to Our Blog</h3>
-                <p class="p-font">Subscribe via e-mail</p>
-                <label><input type="checkbox" name="categories" value="design" />
-                    Design</label>
-                <label><input type="checkbox" name="categories" value="online_courses" />
-                    Online Courses</label>
-                <label><input type="checkbox" name="categories" value="development" />
-                    Design</label>
-                <label><input type="checkbox" name="categories" value="video" />
-                    Design</label>
-            </div>
-            <div class="blog-subscribe-form-right">
-                <p>
-                    We're committed to your privacy. SmartLab Blog uses the
-                    information you provide to us to contact you about our relevant
-                    content, products, and services. You mayunsubscribe from these
-                    communications at any time. For more information, check out our
-                    privacy policy.
-                </p>
-                <div>
-                    <input type="email" name="email" placeholder="e-mail address" />
-                    <button class="button">Subscribe</button>
-                </div>
-            </div>
-        </form>
-    </div>
+</div>
+<div class="blog-subscribe-container contain">
     <div>
-        <p class="h1-font recent">Recent Posts:</p>
-        <div class="blog-recent-container">
-            @foreach($blogs as $blog)
-            @if($loop -> iteration <=4) <a class="recent-blogs" href="/blog/{{$blog->id}}" target="_blank">
-                <h4 class="h2-font">{{$blog -> heading}}</h4>
-                <p>{{$blog->created_at}}</p>
-                </a>
-                @endif
-                @endforeach
-        </div>
+        <h1 class="h1-font">SmartLab Blog</h1>
+        <p class="p-font">
+            Stay up to date with the latest design, video, develop, and
+            programming news.
+        </p>
     </div>
+
+    <form class="blog-subscribe-form">
+        <div class="blog-subscribe-form-left">
+            <h3 class="h1-font">Subscribe to Our Blog</h3>
+            <p class="p-font">Subscribe via e-mail</p>
+            <label><input type="checkbox" name="categories" value="design" />
+                Design</label>
+            <label><input type="checkbox" name="categories" value="online_courses" />
+                Online Courses</label>
+            <label><input type="checkbox" name="categories" value="development" />
+                Development</label>
+            <label><input type="checkbox" name="categories" value="video" />
+                Video animation</label>
+        </div>
+        <div class="blog-subscribe-form-right">
+            <p>
+                We're committed to your privacy. SmartLab Blog uses the
+                information you provide to us to contact you about our relevant
+                content, products, and services. You mayunsubscribe from these
+                communications at any time. For more information, check out our
+                privacy policy.
+            </p>
+            <div>
+                <input type="email" name="email" placeholder="e-mail address" />
+                <button class="button">Subscribe</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="contain">
+    <p class="h1-font recent">Recent Posts:</p>
+    <div class="blog-recent-container">
+        @foreach($blogs as $blog)
+        @if($loop -> iteration <=4) <a class="recent-blogs" href="/blog/{{$blog->id}}" target="_blank">
+            <h4 class="h2-font">{{$blog -> heading}}</h4>
+            <p>{{$blog->created_at}}</p>
+            </a>
+            @endif
+            @endforeach
+    </div>
+</div>
 </div>
 <script>
     window.fbAsyncInit = function() {
