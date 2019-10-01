@@ -18,6 +18,10 @@
         -webkit-font-smoothing: antialiased;
     }
 
+    #blog-text {
+        font-size: 1.2rem !important;
+    }
+
     #blog-text ul {
         padding-left: 16px !important;
     }
