@@ -15,3 +15,9 @@ Route::get('/{lang?}', 'BlogController@index');
 Route::get('/blog/{id}/{language?}/{preview?}', 'BlogController@show');
 
 Route::put('/language', 'LanguageController@switchLanguage');
+Route::post('contact', 'ContactController@handleContactInfo');
+Route::get('schedule', function () {
+    \Illuminate\Support\Facades\Artisan::call('schedule:run');
+
+    return "ok";
+});
