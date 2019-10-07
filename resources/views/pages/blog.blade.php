@@ -363,6 +363,116 @@
         margin-bottom: 25px;
     }
 
+    #form-container {
+        width: 50%;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        position: relative;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+
+    .contact-form-group {
+        flex-basis: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .contact-form-group div {
+        flex-basis: 47%;
+
+    }
+
+    .contact-form-group label {
+        font-size: 1rem;
+        font-family: "Montserrat", sans-serif;
+        margin-bottom: 5px !important;
+        margin-top: 0.5rem !important;
+    }
+
+    .contact-form-group input,
+    .contact-form-group label,
+    .contact-form-group textarea {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .contact-form-group input,
+    textarea {
+        padding: 15px 25px;
+        border-radius: 10px;
+        background-color: rgba(122, 161, 233, .2);
+        border: 2px solid rgba(255, 255, 255, 0);
+        resize: none !important;
+        color: #212529;
+        font-size: 1rem;
+        font-family: "Montserrat", sans-serif !important;
+    }
+
+    .contact-form-group input:focus,
+    textarea:focus {
+        outline: none;
+        border: 2px solid rgba(122, 161, 233);
+    }
+
+    .textarea {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .submit {
+        margin: 0 auto;
+        margin-top: 40px;
+        background-color: var(--button-bg-orange);
+        border: 1px solid var(--button-bg-orange);
+        z-index: 10;
+    }
+
+    .contact-form-group {
+        height: 0;
+        overflow: hidden;
+        transition: height 0.5s ease-in-out;
+    }
+
+    .expanded {
+        height: 95px;
+
+    }
+
+    .expandedTextArea {
+        height: 185px;
+    }
+
+    #contactUs {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: opacity 1s ease-in-out;
+    }
+
+    .fade-away {
+        opacity: 0;
+    }
+
+    .IN-widget {
+        position: absolute;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        opacity: 0;
+    }
+
+    .IN-widget span {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
     @media screen and (min-width: 2000px) {
         .blog-top-bg {
             top: -1050px;
@@ -412,6 +522,10 @@
             width: 147%;
             right: -431px;
             top: -436px;
+        }
+
+        #blog-text img {
+            width: 100% !important;
         }
 
         .blog-recent-container {
@@ -467,9 +581,10 @@
         }
 
         .blog-top-bg {
-            right: -182px;
-            top: -187px;
-            width: 120%;
+            top: -426px;
+            width: 251%;
+            right: -620px;
+            transform: rotate(0deg);
         }
 
         .blog-subscribe-form-right div {
@@ -532,8 +647,10 @@
 
     }
 </style>
-@extends('layouts.app')
+
+<!--@extends('layouts.app')-->
 @section('description', clean($blog->text))
+@section('title', clean($blog->heading))
 @section('content')
 <?php $actual_link = "http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 ?>
@@ -560,11 +677,16 @@
             <div>
                 <a id="share-btn"><img src={{"/images/fb-blog-share.svg"}} /></a>
             </div>
-            <div>
-                <img src={{"/images/twitter-share.svg"}} />
+            <div style="position: relative;">
+
+                <a href="#" class="twitter-share"><img src={{"/images/twitter-share.svg"}} /></a>
             </div>
-            <div>
+            <div style="position: relative;">
                 <img src={{"/images/linkedin-share.svg"}} />
+                <script type="IN/Share" data-url="<?php
+                                                    echo ("https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+
+                                                    ?>"></script>
             </div>
         </div>
     </div>
@@ -590,11 +712,44 @@
         </p>
     </div>
 </div>
+<div id="form-container" class="contain" style="display: none;">
+    <form class="contact-form" action="/contact" method="POST">
+        <!-- Include token -->
+        @csrf
+        <div class="contact-form-group">
+            <div>
+                <label for="name">*@lang('index.formName')</label>
+                <input type="text" name="name" id="name" required />
+            </div>
+            <div>
+                <label for="surnanme">*@lang('index.formSurname')</label>
+                <input type="text" name="lastname" id="lastname" required />
+            </div>
+        </div>
+        <div class="contact-form-group">
+            <div>
+                <label for="subject">*@lang('index.formSubject')</label>
+                <input type="text" name="subject" id="subject" required />
+            </div>
+            <div>
+                <label for="email">*@lang('index.formEmail')</label>
+                <input type="email" name="email" id="email" required />
+            </div>
+        </div>
+        <div class="contact-form-group textarea">
+            <label for="message">*@lang('index.formMessage')</label>
+            <textarea name="message" rows="7" id="message" required></textarea>
+        </div>
+        <button id="blogFormButton" class="button submit button-orange" value="Send">Send</button>
+
+    </form>
+    <button id="contactUs" class="button submit button-orange">Contact us</button>
+</div>
 <div class="blog-subscribe-container contain">
     <div>
         <h1 class="h1-font">SmartLab Blog</h1>
         <p class="p-font">
-            Stay up to date with the latest design, video, develop, and
+            Stay up to date with the latest design, video, development, and
             programming news.
         </p>
     </div>
@@ -641,18 +796,30 @@
 </div>
 </div>
 <script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId: '438991246698405', // you need to create an facebook app
-            autoLogAppEvents: true,
-            xfbml: true,
-            version: 'v4.0'
-        });
-    };
-</script>
-<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
-<script>
     document.addEventListener("DOMContentLoaded", function(event) {
+        var getWindowOptions = function() {
+            var width = 500;
+            var height = 350;
+            var left = (window.innerWidth / 2) - (width / 2);
+            var top = (window.innerHeight / 2) - (height / 2);
+
+            return [
+                'resizable,scrollbars,status',
+                'height=' + height,
+                'width=' + width,
+                'left=' + left,
+                'top=' + top,
+            ].join();
+        };
+        var twitterBtn = document.querySelector('.twitter-share');
+        var shareUrl = 'https://twitter.com/intent/tweet?url=' + location.href;
+        twitterBtn.href = shareUrl; // 1
+
+        twitterBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            var win = window.open(shareUrl, 'ShareOnTwitter', getWindowOptions());
+            win.opener = null; // 2
+        });
         document.getElementById("share-btn").addEventListener('click', function() {
             FB.ui({
                 method: 'share',
@@ -664,7 +831,27 @@
         setTimeout(function() {
             loaderContainer.style.display = "none";
         }, 1000)
+        let contactUs = document.querySelector("#contactUs");
+        let contactFormGroup = document.querySelectorAll(".contact-form-group");
+        let blogFormButton = document.querySelector("#blogFormButton");
 
+        function expand() {
+            console.log("expand")
+            contactUs.classList.add("fade-away");
+            setTimeout(function() {
+                contactUs.style.display = "none";
+            }, 500)
+            for (let i = 0; i < contactFormGroup.length; i++) {
+                if (i < 2) {
+                    contactFormGroup[i].classList.add("expanded");
+                } else {
+                    contactFormGroup[i].classList.add("expandedTextArea");
+                }
+
+            }
+
+        }
+        contactUs.addEventListener("click", expand);
     });
 
     (function() {

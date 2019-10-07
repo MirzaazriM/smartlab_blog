@@ -22,6 +22,8 @@
     #nav-top {
         height: 30px;
         margin-top: 15px;
+        overflow: hidden;
+        transition: all 0.2s ease-in-out;
     }
 
     ul {
@@ -495,19 +497,12 @@
         }
 
         #nav-top {
-            height: auto;
+            height: 40px;
             align-items: center;
             margin-bottom: 15px;
         }
     }
 </style>
-
-<script>
-    function changeSiteLanguage(value) {
-        document.getElementById("languageForm").submit();
-    }
-</script>
-
 @section('menu')
 <nav>
     <ul class="contain">
@@ -592,31 +587,78 @@
 </li>
 -->
 
+
+@endsection
+@section('js2')
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
         let navTop = document.querySelector("#nav-top");
+        let navTopLabel = document.querySelectorAll(".nav-top label");
+        let navTopPhone = document.querySelectorAll(".nav-top p span");
+        console.log(navTopLabel, navTopPhone);
         let navBot = document.querySelector(".nav-bot");
         let nav = document.querySelector("nav");
 
-        function handleScroll() {
-            if (window.pageYOffset > 100) {
-                navTop.style.display = "none";
-                navBot.style.marginTop = "10px";
-                navBot.style.marginBottom = "10px";
+        function scrollBot() {
+            navTop.style.height = "0px";
+            navTop.style.marginBottom = "0px";
+            navTop.style.marginTop = "0px";
+            navBot.style.marginTop = "10px";
+            navBot.style.marginBottom = "10px";
+            nav.style.backgroundColor = "white";
+            nav.classList.add("shadow");
+        }
+
+        function scrollTop(position) {
+            navTop.style.height = "40px";
+            navTop.style.marginTop = "10px";
+            if (position > 10) {
                 nav.style.backgroundColor = "white";
-                nav.classList.add("shadow");
+
+                for (let i = 0; i < navTopLabel.length; i++) {
+                    navTopLabel[i].style.color = "black";
+                }
+                for (let i = 0; i < navTopPhone.length; i++) {
+                    navTopPhone[i].style.color = "black";
+                }
             } else {
-                navTop.style.display = "flex";
-                navBot.style.marginTop = "0px";
-                navBot.style.marginBottom = "0px";
                 nav.style.backgroundColor = "transparent";
                 nav.classList.remove("shadow");
+                navBot.style.marginBottom = "0px";
+                for (let i = 0; i < navTopLabel.length; i++) {
+                    navTopLabel[i].style.color = "white";
+                }
+                for (let i = 0; i < navTopPhone.length; i++) {
+                    navTopPhone[i].style.color = "white";
+                }
             }
+
+
         }
-        handleScroll();
-        window.addEventListener("scroll", function(event) {
-            handleScroll();
+
+
+        window.addEventListener("scroll", function(e) {
+            // "false" if direction is down and "true" if up
+            //console.log(this.oldScroll > this.scrollY);
+            console.log(this.scrollY)
+            if (this.oldScroll > this.scrollY) {
+                console.log("up")
+                scrollTop(this.scrollY);
+            } else {
+                console.log("bot")
+                scrollBot();
+
+            }
+            this.oldScroll = this.scrollY;
+
+
+
         });
     });
+</script>
+<script>
+    function changeSiteLanguage(value) {
+        document.getElementById("languageForm").submit();
+    }
 </script>
 @endsection

@@ -351,6 +351,11 @@
         padding-bottom: 60px;
         text-align: left;
         overflow: hidden;
+        text-shadow: 0px 0px 10px black;
+    }
+
+    .blog-top-content h2 {
+        position: relative;
     }
 
     .blog-top-content:after {
@@ -376,15 +381,15 @@
         margin-top: 50px;
     }
 
-    .blog-top-content p::after {
+    .blog-top-content .blog-text::after {
         position: absolute;
         content: "...";
-        bottom: 0px;
-        font-size: 1em;
+        bottom: -5px;
+        right: 0;
+        font-size: 2em;
         /* line-height: 1em; */
-        padding-left: 5px;
-        padding-right: 10px;
-
+        /*padding-left: 5px;*/
+        /* padding-right: 10px;*/
         font-weight: 500;
     }
 
@@ -399,11 +404,23 @@
         border-radius: 20px;
         display: flex;
         flex-direction: column-reverse;
-        background-image: url(images/blog-post-1.jpg);
+        background-image: url(/images/blog-post-1.jpg);
         background-size: cover;
         transition: all 0.2s ease-in-out;
         position: relative;
         padding-top: 20%;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+
+    .top-blog-overlay {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
     }
 
     .blog-top-main:hover {
@@ -415,7 +432,7 @@
         -webkit-box-shadow: -1px -1px 15px 1px var(--shadow-color);
         -moz-box-shadow: -1px -1px 15px 1px var(--shadow-color);
         box-shadow: -1px -1px 15px 1px var(--shadow-color);
-        padding-bottom: 2.8em;
+        padding-bottom: 1.8em;
         overflow: hidden;
         cursor: pointer;
         border-radius: 20px;
@@ -426,6 +443,9 @@
         transition: all 0.2s ease-in-out;
         position: relative;
         padding-top: 20%;
+        background-size: cover;
+        background-position: center;
+        position: relative;
     }
 
     .blog-top-secondary:hover {
@@ -482,6 +502,7 @@
         font-size: 1.2em;
         line-height: 1.2;
         height: 120px;
+        text-align: left;
         /* padding-bottom: 14px; */
     }
 
@@ -685,17 +706,26 @@
 
         .blog-top-container {
             flex-wrap: wrap;
-
+            height: auto;
         }
 
         .blog-top-main {
             flex-basis: 100%;
             margin-bottom: 10px;
+            max-height: 520px;
         }
 
         .blog-top-secondary {
-            flex-basis: 66%;
+            flex-basis: 100%;
+            max-height: 400px;
+            padding-top: 70px;
         }
+
+        .blog-top-content:after {
+            padding-bottom: 28px;
+        }
+
+
 
         .blog-subscribe-container {
             flex-direction: column;
@@ -715,6 +745,26 @@
             width: 153%;
             right: -476px;
             transform: rotate(-8deg);
+        }
+
+        .blog-top-content p {
+            position: relative;
+            margin-top: 48px;
+            max-height: 71px;
+            overflow: hidden;
+            padding-right: 10px;
+        }
+
+        .blog-top_content .blog-text:after {
+            display: inline-block;
+            content: "...";
+            font-size:
+        }
+
+        .blog-top-content:after {
+            display: none;
+            padding-bottom: 20px;
+            padding-right: 10px;
         }
 
         .blog-subscribe-form {
@@ -749,6 +799,14 @@
             width: 100%;
         }
 
+        .blog-top-content p {
+            padding-right: 16px;
+        }
+
+        .blog-top-content .blog-text::after {
+            right: 8px;
+        }
+
         .blog-subscribe-form-right div {
             flex-direction: column;
             align-items: center;
@@ -772,12 +830,11 @@
             height: 60px;
         }
 
-
-
         .blog-top-content {
             padding-right: 15px;
             padding-left: 15px;
             padding-bottom: 30px;
+            margin-top: 50px;
         }
 
         .blog-top-secondary {
@@ -802,23 +859,21 @@
 
     @media screen and (max-width: 375px) {
         .blog-top-bg {
-            top: -419px;
+            top: -375px;
             width: 249%;
             right: -533px;
-            transform: rotate(-7deg);
         }
     }
 
     @media screen and (max-width: 320px) {
         .blog-top-bg {
-            top: -392px;
+            top: -379px;
             width: 247%;
             right: -385px;
-            transform: rotate(-7deg);
+            transform: rotate(-3deg);
         }
     }
 </style>
-
 @section('content')
 <!--<div class="coming-soon-container">
     <div class="coming-soon-logo-container contain">
@@ -845,7 +900,7 @@
         <div class="blog-subscribe-container-info">
             <h1 class="h1-font">SmartLab Blog</h1>
             <p class="p-font">
-                Stay up to date with the latest design, video, develop, and
+                Stay up to date with the latest design, video, development, and
                 programming news.
             </p>
         </div>
@@ -887,21 +942,22 @@
         @foreach ($blogs as $blog)
         @if($loop -> iteration == 1)
         <div class="blog-top-container">
-            <a href="/blog/{{$blog->id}}" target="_blank" class="blog-top-main blog-hover">
-                <div class="blog-icon-container <?php switch ($blog->tag) {
-                                                    case "development":
-                                                        echo "dev-icon";
-                                                        break;
-                                                    case "onlinecourses":
-                                                        echo "courses-icon";
-                                                        break;
-                                                    case "moodle":
-                                                        echo "moodle-icon";
-                                                        break;
-                                                    case "educational";
-                                                        echo "video-icon";
-                                                        break;
-                                                } ?>">
+            <a href="/blog/{{$blog->id}}" target="_blank" class="blog-top-main blog-hover" style="background-image:url(https://smartlab.ba{{$blog->image_path}})">
+                <div class="top-blog-overlay"></div>
+                <div class=" blog-icon-container <?php switch ($blog->tag) {
+                                                        case "development":
+                                                            echo "dev-icon";
+                                                            break;
+                                                        case "onlinecourses":
+                                                            echo "courses-icon";
+                                                            break;
+                                                        case "moodle":
+                                                            echo "moodle-icon";
+                                                            break;
+                                                        case "educational";
+                                                            echo "video-icon";
+                                                            break;
+                                                    } ?>">
                     <span class="blog-icon-description"><?php switch ($blog->tag) {
                                                             case "development":
                                                                 echo "Development";
@@ -933,7 +989,7 @@
                 </div>
                 <div class="blog-top-content">
                     <h2 class="h2-font --h2-font-white-bold"> {{$blog->heading}}</h2>
-                    <p class="p-font --p-font-white"><span>{{$blog->created_at}}</span> <span>{{$blog->name}}</span></p>
+                    <p class=" p-font --p-font-white"><span>{{$blog->created_at}}</span> <span>{{$blog->name}}</span></p>
                     <input class="blog-value" type="hidden" value=' {{$blog->text}}'>
                     <p class="p-font --p-font-white blog-text">
 
@@ -942,7 +998,8 @@
             </a>
             @endif
             @if($loop -> iteration == 2)
-            <a href="/blog/{{$blog->id}}" target="_blank" class="blog-top-secondary blog-hover">
+            <a href="/blog/{{$blog->id}}" target="_blank" class="blog-top-secondary blog-hover" style="background-image:url(https://smartlab.ba{{$blog->image_path}})">
+                <div class="top-blog-overlay"></div>
                 <div class="blog-icon-container <?php switch ($blog->tag) {
                                                     case "development":
                                                         echo "dev-icon";
@@ -994,6 +1051,7 @@
 
                     </p>
                 </div>
+
             </a>
         </div>
         @endif
@@ -1079,6 +1137,9 @@
         </div>-->
     </div>
 </section>
+
+@endsection
+@section('js')
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
         let blogValue = document.querySelectorAll(".blog-value");
