@@ -432,7 +432,7 @@
         -webkit-box-shadow: -1px -1px 15px 1px var(--shadow-color);
         -moz-box-shadow: -1px -1px 15px 1px var(--shadow-color);
         box-shadow: -1px -1px 15px 1px var(--shadow-color);
-        padding-bottom: 1.8em;
+        padding-bottom: 2.3em;
         overflow: hidden;
         cursor: pointer;
         border-radius: 20px;
